@@ -1,6 +1,6 @@
 from typing import Any, List, Optional
 from fastapi import APIRouter, Depends, HTTPException, BackgroundTasks, Query
-from fastapi.responses import Response
+from fastapi.responses import Response, RedirectResponse
 from sqlalchemy.ext.asyncio import AsyncSession
 import httpx
 from collections import OrderedDict
@@ -10,6 +10,8 @@ from app.db.session import get_db
 from app.repositories.catalog import folder_repo, image_repo
 from app.schemas import catalog as schemas
 from app.core.sync_engine import global_sync_state, start_background_sync
+from sqlalchemy import update
+from app.models.catalog import CatalogImage
 
 router = APIRouter()
 
@@ -41,44 +43,61 @@ PROXY_HEADERS = {
 async def proxy_drive_image(
     id: str = Query(..., description="Google Drive file ID"),
     sz: int = Query(600, description="Image width in pixels"),
+    background_tasks: BackgroundTasks = BackgroundTasks(),
+    db: AsyncSession = Depends(get_db)
 ) -> Response:
-    """Async proxy for Google Drive images with in-memory LRU cache."""
-    cache_key = f"{id}:{sz}"
+    """
+    Returns the locally cached WebP image if it exists.
+    If it does not exist, triggers a background cache job and INSTANTLY redirects
+    the user to the Google Drive direct URL so the UI doesn't block.
+    """
+    if not id:
+        raise HTTPException(status_code=400, detail="Missing id parameter")
+        
+    if sz <= 150:
+        target_sz = 150
+    elif sz <= 300:
+        target_sz = 300
+    else:
+        target_sz = 600
 
-    # 1. Return from cache if available (instant)
-    cached = await _get_cached(cache_key)
-    if cached:
-        data, content_type = cached
+    from app.core.image_cache import get_thumbnail_path, create_thumbnail_background
+    file_path = get_thumbnail_path(id, target_sz)
+
+    if file_path:
+        import aiofiles
+        async with aiofiles.open(file_path, "rb") as f:
+            data = await f.read()
+
+        # Update DB asynchronously to reflect cache status (best effort)
+        # We don't block the response for this
+        try:
+            update_data = {"cache_status": True}
+            if target_sz == 150: update_data["thumbnail_150"] = file_path
+            elif target_sz == 300: update_data["thumbnail_300"] = file_path
+            else: update_data["thumbnail_600"] = file_path
+
+            stmt = update(CatalogImage).where(CatalogImage.drive_file_id == id).values(**update_data)
+            await db.execute(stmt)
+            await db.commit()
+        except Exception:
+            pass # Ignore DB update errors on read path
+
         return Response(
-            content=data,
-            media_type=content_type,
-            headers={"Cache-Control": "public, max-age=86400", "X-Cache": "HIT"},
+            content=data, 
+            media_type="image/webp", 
+            headers={
+                "Cache-Control": "public, max-age=31536000",
+                "X-Cache": "HIT"
+            }
         )
-
-    # 2. Fetch from Google Drive asynchronously
-    url = f"https://drive.google.com/thumbnail?id={id}&sz=w{sz}"
-    try:
-        async with httpx.AsyncClient(timeout=12, follow_redirects=True) as client:
-            resp = await client.get(url, headers=PROXY_HEADERS)
-            resp.raise_for_status()
-            content_type = resp.headers.get("Content-Type", "image/jpeg")
-            data = resp.content
-
-        await _put_cached(cache_key, data, content_type)
-
-        return Response(
-            content=data,
-            media_type=content_type,
-            headers={"Cache-Control": "public, max-age=86400", "X-Cache": "MISS"},
-        )
-    except httpx.HTTPStatusError as e:
-        raise HTTPException(status_code=e.response.status_code, detail="Drive image not accessible")
-    except Exception as e:
-        raise HTTPException(status_code=502, detail=f"Failed to fetch image: {e}")
-
-
-
-
+    else:
+        # Trigger background caching
+        background_tasks.add_task(create_thumbnail_background, id, target_sz)
+        
+        # Redirect to Google Drive URL instantly so UI loads immediately
+        drive_url = f"https://drive.google.com/thumbnail?id={id}&sz=w{target_sz}"
+        return RedirectResponse(url=drive_url, status_code=302)
 
 @router.get("/folders/", response_model=List[schemas.CatalogFolder])
 async def read_folders(

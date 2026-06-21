@@ -7,6 +7,11 @@ class CatalogImageBase(BaseModel):
     image_url: str
     is_cover: bool = False
     sort_order: int = 0
+    drive_file_id: Optional[str] = None
+    thumbnail_150: Optional[str] = None
+    thumbnail_300: Optional[str] = None
+    thumbnail_600: Optional[str] = None
+    cache_status: Optional[bool] = False
 
 class CatalogImageCreate(CatalogImageBase):
     folder_id: int
@@ -25,6 +30,7 @@ class CatalogFolderBase(BaseModel):
     image_count: int = 0
     thumbnail_url: Optional[str] = None
     last_sync: Optional[datetime] = None
+    cache_status: Optional[bool] = False
 
 class CatalogFolderCreate(CatalogFolderBase):
     pass
