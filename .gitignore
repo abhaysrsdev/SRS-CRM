@@ -1,0 +1,40 @@
+# Node
+node_modules/
+dist/
+dist-ssr/
+*.local
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+*.egg-info/
+.eggs/
+
+# Database
+*.db
+
+# Environment
+.env
+.env.*
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# IDE
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+.DS_Store
+
+# Large data files
+*.xlsx
+ledger_data.json
+sales_order_data.json
