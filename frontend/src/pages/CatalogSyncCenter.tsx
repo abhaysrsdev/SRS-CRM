@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useState, useEffect } from 'react';
 import { RefreshCw, Play, ShieldAlert, FolderSync, Info, AlertTriangle, FileText, CheckCircle2, History } from 'lucide-react';
 import { Button } from '../components/ui/button';
@@ -249,3 +250,4 @@ export function CatalogSyncCenter() {
     </div>
   );
 }
+

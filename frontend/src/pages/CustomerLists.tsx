@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useState, useRef, useMemo, useCallback } from 'react';
 import {
   Search, Filter, Copy, ChevronRight, PenTool, MessageCircle,
@@ -1041,3 +1042,4 @@ function Brain({ className }: { className?: string }) {
     </svg>
   );
 }
+

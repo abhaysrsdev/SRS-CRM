@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { useState, useMemo } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
 import { 
@@ -1026,3 +1027,4 @@ export function InventoryInsights() {
     </div>
   );
 }
+

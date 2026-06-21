@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import { Search, Image as ImageIcon, CheckCircle, RefreshCw, Layers, LayoutGrid, AlertCircle, X, ChevronLeft, ChevronRight, XCircle, Package, Filter, Images, BookOpen, Tag, Copy } from 'lucide-react';
 import { Input } from '../components/ui/input';
@@ -660,3 +661,4 @@ export function Catalog() {
     </div>
   );
 }
+

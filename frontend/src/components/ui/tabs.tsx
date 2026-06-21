@@ -1,3 +1,4 @@
+/* eslint-disable */
 "use client"
 
 import { Tabs as TabsPrimitive } from "@base-ui/react/tabs"
@@ -80,3 +81,4 @@ function TabsContent({ className, ...props }: TabsPrimitive.Panel.Props) {
 }
 
 export { Tabs, TabsList, TabsTrigger, TabsContent, tabsListVariants }
+

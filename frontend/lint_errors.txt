@@ -1,0 +1,218 @@
+
+C:\Users\srsph\OneDrive\Desktop\SRS CRM\Office CRM\frontend\src\components\ui\badge.tsx
+  52:17  error  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+C:\Users\srsph\OneDrive\Desktop\SRS CRM\Office CRM\frontend\src\components\ui\button.tsx
+  58:18  error  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+C:\Users\srsph\OneDrive\Desktop\SRS CRM\Office CRM\frontend\src\components\ui\tabs.tsx
+  82:52  error  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+C:\Users\srsph\OneDrive\Desktop\SRS CRM\Office CRM\frontend\src\pages\Catalog.tsx
+  144:5  error  Error: Cannot access variable before it is declared
+
+`fetchFolders` is accessed before it is declared, which prevents the earlier access from updating when this value changes over time.
+
+C:\Users\srsph\OneDrive\Desktop\SRS CRM\Office CRM\frontend\src\pages\Catalog.tsx:144:5
+  142 |
+  143 |   useEffect(() => {
+> 144 |     fetchFolders(true);
+      |     ^^^^^^^^^^^^ `fetchFolders` accessed before it is declared
+  145 |     fetchSyncStatus();
+  146 |   }, [searchTerm]);
+  147 |
+
+C:\Users\srsph\OneDrive\Desktop\SRS CRM\Office CRM\frontend\src\pages\Catalog.tsx:162:3
+  160 |   }, [page]);
+  161 |
+> 162 |   const fetchFolders = async (reset = false) => {
+      |   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 163 |     setLoading(true);
+      | ^^^^^^^^^^^^^^^^^^^^^
+> 164 |     const currentPage = reset ? 1 : page;
+      …
+      | ^^^^^^^^^^^^^^^^^^^^^
+> 179 |     }
+      | ^^^^^^^^^^^^^^^^^^^^^
+> 180 |   };
+      | ^^^^^ `fetchFolders` is declared here
+  181 |
+  182 |   const fetchSyncStatus = async () => {
+  183 |     try {                                                                                                                                                     react-hooks/immutability
+  145:5  error  Error: Cannot access variable before it is declared
+
+`fetchSyncStatus` is accessed before it is declared, which prevents the earlier access from updating when this value changes over time.
+
+C:\Users\srsph\OneDrive\Desktop\SRS CRM\Office CRM\frontend\src\pages\Catalog.tsx:145:5
+  143 |   useEffect(() => {
+  144 |     fetchFolders(true);
+> 145 |     fetchSyncStatus();
+      |     ^^^^^^^^^^^^^^^ `fetchSyncStatus` accessed before it is declared
+  146 |   }, [searchTerm]);
+  147 |
+  148 |   useEffect(() => {
+
+C:\Users\srsph\OneDrive\Desktop\SRS CRM\Office CRM\frontend\src\pages\Catalog.tsx:182:3
+  180 |   };
+  181 |
+> 182 |   const fetchSyncStatus = async () => {
+      |   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 183 |     try {
+      | ^^^^^^^^^
+> 184 |       const res = await fetch(`${API_BASE_URL}/catalog/sync/status`);
+      | ^^^^^^^^^
+> 185 |       const data = await res.json();
+      | ^^^^^^^^^
+> 186 |       setSyncStatus(data);
+      | ^^^^^^^^^
+> 187 |     } catch (e) {}
+      | ^^^^^^^^^
+> 188 |   };
+      | ^^^^^ `fetchSyncStatus` is declared here
+  189 |
+  190 |   const handleOpenFolder = async (folder: CatalogFolder) => {
+  191 |     setSelectedFolder(folder);  react-hooks/immutability
+
+C:\Users\srsph\OneDrive\Desktop\SRS CRM\Office CRM\frontend\src\pages\CatalogSyncCenter.tsx
+  21:5  error  Error: Cannot access variable before it is declared
+
+`fetchSyncStatus` is accessed before it is declared, which prevents the earlier access from updating when this value changes over time.
+
+C:\Users\srsph\OneDrive\Desktop\SRS CRM\Office CRM\frontend\src\pages\CatalogSyncCenter.tsx:21:5
+  19 |
+  20 |   useEffect(() => {
+> 21 |     fetchSyncStatus();
+     |     ^^^^^^^^^^^^^^^ `fetchSyncStatus` accessed before it is declared
+  22 |     fetchReports();
+  23 |
+  24 |     // Poll status when syncing
+
+C:\Users\srsph\OneDrive\Desktop\SRS CRM\Office CRM\frontend\src\pages\CatalogSyncCenter.tsx:33:3
+  31 |   }, []);
+  32 |
+> 33 |   const fetchSyncStatus = async () => {
+     |   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 34 |     try {
+     | ^^^^^^^^^
+> 35 |       const res = await fetch(`${API_BASE_URL}/catalog/sync/status`);
+     | ^^^^^^^^^
+> 36 |       const data = await res.json();
+     | ^^^^^^^^^
+> 37 |       setSyncStatus(data);
+     | ^^^^^^^^^
+> 38 |       setSyncing(data.is_syncing);
+     | ^^^^^^^^^
+> 39 |     } catch (e) {
+     | ^^^^^^^^^
+> 40 |       console.error(e);
+     | ^^^^^^^^^
+> 41 |     }
+     | ^^^^^^^^^
+> 42 |   };
+     | ^^^^^ `fetchSyncStatus` is declared here
+  43 |
+  44 |   const fetchReports = async () => {
+  45 |     try {  react-hooks/immutability
+  22:5  error  Error: Cannot access variable before it is declared
+
+`fetchReports` is accessed before it is declared, which prevents the earlier access from updating when this value changes over time.
+
+C:\Users\srsph\OneDrive\Desktop\SRS CRM\Office CRM\frontend\src\pages\CatalogSyncCenter.tsx:22:5
+  20 |   useEffect(() => {
+  21 |     fetchSyncStatus();
+> 22 |     fetchReports();
+     |     ^^^^^^^^^^^^ `fetchReports` accessed before it is declared
+  23 |
+  24 |     // Poll status when syncing
+  25 |     const interval = setInterval(() => {
+
+C:\Users\srsph\OneDrive\Desktop\SRS CRM\Office CRM\frontend\src\pages\CatalogSyncCenter.tsx:44:3
+  42 |   };
+  43 |
+> 44 |   const fetchReports = async () => {
+     |   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 45 |     try {
+     | ^^^^^^^^^
+> 46 |       const res = await fetch(`${API_BASE_URL}/catalog/reports/`);
+     | ^^^^^^^^^
+> 47 |       const data = await res.json();
+     | ^^^^^^^^^
+> 48 |       setReports(data);
+     | ^^^^^^^^^
+> 49 |     } catch (e) {
+     | ^^^^^^^^^
+> 50 |       console.error(e);
+     | ^^^^^^^^^
+> 51 |     }
+     | ^^^^^^^^^
+> 52 |   };
+     | ^^^^^ `fetchReports` is declared here
+  53 |
+  54 |   const handleSync = async (reSync = false) => {
+  55 |     setSyncing(true);                         react-hooks/immutability
+
+C:\Users\srsph\OneDrive\Desktop\SRS CRM\Office CRM\frontend\src\pages\ControlCenter.tsx
+  112:18  error  Error: Cannot call impure function during render
+
+`Date.now` is an impure function. Calling an impure function can produce unstable results that update unpredictably when the component happens to re-render. (https://react.dev/reference/rules/components-and-hooks-must-be-pure#components-and-hooks-must-be-idempotent).
+
+C:\Users\srsph\OneDrive\Desktop\SRS CRM\Office CRM\frontend\src\pages\ControlCenter.tsx:112:18
+  110 |     if (!newUserName.trim() || !newUserEmail.trim()) return;
+  111 |     const userObj: AppUser = {
+> 112 |       id: String(Date.now()),
+      |                  ^^^^^^^^^^ Cannot call impure function
+  113 |       name: newUserName,
+  114 |       email: newUserEmail,
+  115 |       role: newUserRole,  react-hooks/purity
+
+C:\Users\srsph\OneDrive\Desktop\SRS CRM\Office CRM\frontend\src\pages\CustomerLists.tsx
+  922:61  error  Unnecessary escape character: \/  no-useless-escape
+
+C:\Users\srsph\OneDrive\Desktop\SRS CRM\Office CRM\frontend\src\pages\InventoryInsights.tsx
+  542:11  error  Unexpected constant truthiness on the left-hand side of a `&&` expression  no-constant-binary-expression
+
+C:\Users\srsph\OneDrive\Desktop\SRS CRM\Office CRM\frontend\src\pages\SalesIntelligence.tsx
+  426:11  error  The value assigned to 'opportunityType' is not used in subsequent statements                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    no-useless-assignment
+  427:11  error  The value assigned to 'reason' is not used in subsequent statements                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             no-useless-assignment
+  510:7   error  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+C:\Users\srsph\OneDrive\Desktop\SRS CRM\Office CRM\frontend\src\pages\SalesIntelligence.tsx:510:7
+  508 |   React.useEffect(() => {
+  509 |     if (metrics.customerRiskList.length > 0 && !selectedCustName) {
+> 510 |       setSelectedCustName(metrics.customerRiskList[0].name);
+      |       ^^^^^^^^^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  511 |     }
+  512 |   }, [metrics.customerRiskList, selectedCustName]);
+  513 |  react-hooks/set-state-in-effect
+  582:18  error  Error: Cannot call impure function during render
+
+`Date.now` is an impure function. Calling an impure function can produce unstable results that update unpredictably when the component happens to re-render. (https://react.dev/reference/rules/components-and-hooks-must-be-pure#components-and-hooks-must-be-idempotent).
+
+C:\Users\srsph\OneDrive\Desktop\SRS CRM\Office CRM\frontend\src\pages\SalesIntelligence.tsx:582:18
+  580 |     // Add to Audit Log
+  581 |     const newLog = {
+> 582 |       id: String(Date.now()),
+      |                  ^^^^^^^^^^ Cannot call impure function
+  583 |       user: currentRole,
+  584 |       action: `${action} Workflow`,
+  585 |       target: `Approval ID #${id}`,                                                                                                                                                                                                                                                                                                                                                                                                                                                   react-hooks/purity
+  617:18  error  Error: Cannot call impure function during render
+
+`Date.now` is an impure function. Calling an impure function can produce unstable results that update unpredictably when the component happens to re-render. (https://react.dev/reference/rules/components-and-hooks-must-be-pure#components-and-hooks-must-be-idempotent).
+
+C:\Users\srsph\OneDrive\Desktop\SRS CRM\Office CRM\frontend\src\pages\SalesIntelligence.tsx:617:18
+  615 |
+  616 |     const newLog = {
+> 617 |       id: String(Date.now()),
+      |                  ^^^^^^^^^^ Cannot call impure function
+  618 |       customer,
+  619 |       type,
+  620 |       message,                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 react-hooks/purity
+
+✖ 15 problems (15 errors, 0 warnings)
