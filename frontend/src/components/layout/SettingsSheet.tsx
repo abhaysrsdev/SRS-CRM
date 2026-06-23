@@ -11,7 +11,24 @@ import {
 import { Badge } from '../ui/badge';
 
 export function SettingsSheet() {
-  const [darkMode, setDarkMode] = React.useState(false);
+  const [darkMode, setDarkMode] = React.useState(() => {
+    if (typeof document !== 'undefined') {
+      return document.documentElement.classList.contains('dark');
+    }
+    return false;
+  });
+
+  const toggleDarkMode = () => {
+    setDarkMode(prev => {
+      const next = !prev;
+      if (next) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+      return next;
+    });
+  };
   const [soundEnabled, setSoundEnabled] = React.useState(true);
   const [compactMode, setCompactMode] = React.useState(false);
   const [isSyncing, setIsSyncing] = React.useState(false);
@@ -68,7 +85,7 @@ export function SettingsSheet() {
               <Maximize className="h-4 w-4" /> Preferences
             </h4>
             <div className="space-y-1 bg-slate-50 border border-slate-100 rounded-2xl p-2">
-              <div className="flex items-center justify-between p-3 rounded-xl hover:bg-white transition-colors cursor-pointer" onClick={() => setDarkMode(!darkMode)}>
+              <div className="flex items-center justify-between p-3 rounded-xl hover:bg-white transition-colors cursor-pointer" onClick={toggleDarkMode}>
                 <div className="flex items-center gap-3">
                   <div className={`h-8 w-8 rounded-lg flex items-center justify-center ${darkMode ? 'bg-indigo-100 text-indigo-600' : 'bg-slate-200 text-slate-600'}`}>
                     {darkMode ? <Moon className="h-4 w-4" /> : <Sun className="h-4 w-4" />}
