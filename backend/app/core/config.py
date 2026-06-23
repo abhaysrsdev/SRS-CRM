@@ -11,19 +11,28 @@ class Settings(BaseSettings):
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 60 * 24 * 7 # 7 days
     
     # DATABASE
-    POSTGRES_SERVER: str = "localhost"
-    POSTGRES_USER: str = "postgres"
-    POSTGRES_PASSWORD: str = "postgres"
-    POSTGRES_DB: str = "crm_db"
-    POSTGRES_PORT: str = "5432"
+    DATABASE_URL: Optional[str] = None
+    DATABASE_URL_SYNC: Optional[str] = None
 
     @property
     def SQLALCHEMY_DATABASE_URI(self) -> str:
-        # Use SQLite for local development since Docker is not available
+        if self.DATABASE_URL:
+            # Cloud providers often give postgres://, sqlalchemy async needs postgresql+asyncpg://
+            url = self.DATABASE_URL
+            if url.startswith("postgres://"):
+                url = url.replace("postgres://", "postgresql+asyncpg://", 1)
+            elif url.startswith("postgresql://"):
+                url = url.replace("postgresql://", "postgresql+asyncpg://", 1)
+            return url
         return "sqlite+aiosqlite:///./crm.db"
 
     @property
     def SQLALCHEMY_DATABASE_URI_SYNC(self) -> str:
+        if self.DATABASE_URL_SYNC:
+            url = self.DATABASE_URL_SYNC
+            if url.startswith("postgres://"):
+                url = url.replace("postgres://", "postgresql://", 1)
+            return url
         return "sqlite:///./crm.db"
 
     # REDIS
