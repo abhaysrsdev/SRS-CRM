@@ -1,8 +1,6 @@
 import type { Customer, Product, PurchaseHistory, CustomerTag, Interaction, SalesOrder } from '../types';
 
-export const API_BASE_URL = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1"
-  ? "http://localhost:8000/api/v1"
-  : "https://backend-abhaysrsdev-9271s-projects.vercel.app/api/v1";
+export const API_BASE_URL = "https://srs-crm-api-live.vercel.app/api/v1";
 
 async function fetchAPI<T>(endpoint: string): Promise<T> {
   const response = await fetch(`${API_BASE_URL}${endpoint}`);

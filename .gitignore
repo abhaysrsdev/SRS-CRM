@@ -38,3 +38,5 @@ npm-debug.log*
 *.xlsx
 ledger_data.json
 sales_order_data.json
+
+.vercel
