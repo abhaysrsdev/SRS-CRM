@@ -78,8 +78,8 @@ function KPICard({ label, value, sub, icon: Icon, color }: any) {
       </div>
       <div className="min-w-0">
         <p className="text-xs font-bold text-slate-400 uppercase tracking-wider">{label}</p>
-        <h3 className="text-2xl font-black text-slate-900 mt-0.5 truncate">{value}</h3>
-        {sub && <p className="text-xs text-slate-500 mt-0.5">{sub}</p>}
+        <h3 className="text-xl sm:text-2xl font-black text-slate-900 mt-0.5 break-words">{value}</h3>
+        {sub && <p className="text-[10px] sm:text-xs text-slate-500 mt-0.5">{sub}</p>}
       </div>
     </motion.div>
   );
@@ -220,21 +220,21 @@ export function InventoryInsights() {
         </div>
       </div>
 
-      <div className="max-w-[1700px] mx-auto px-8 py-8 space-y-8">
-        {/* ── KPI Strip ─────────────────────────────────────────────────────── */}
-        <StaggerContainer className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-4">
-          <StaggerItem><KPICard label="Total SKUs"        value={metrics.totalItems}       icon={Package}     color="#6366f1" /></StaggerItem>
-          <StaggerItem><KPICard label="Total Pieces"      value={metrics.totalPcs.toLocaleString()} icon={Box} color="#3b82f6" /></StaggerItem>
-          <StaggerItem><KPICard label="Total Value"       value={`₹${(metrics.totalAmount/10000000).toFixed(2)}Cr`} icon={BarChart2} color="#10b981" /></StaggerItem>
-          <StaggerItem><KPICard label="🔥 Bestsellers"    value={metrics.bestsellers}       icon={Star}        color="#f59e0b" sub="Top revenue movers" /></StaggerItem>
-          <StaggerItem><KPICard label="⚠️ Dead Stock"     value={metrics.deadStock}         icon={PackageX}    color="#ef4444" sub="Needs clearance action" /></StaggerItem>
-          <StaggerItem><KPICard label="🚨 Critical < 5"  value={metrics.critical}          icon={AlertTriangle} color="#8b5cf6" sub="Reorder immediately" /></StaggerItem>
-        </StaggerContainer>
-
+      <div className="max-w-[1700px] mx-auto px-4 sm:px-8 py-8 space-y-8">
         <AnimatePresence mode="wait">
           {/* ════════════════════ TAB: OVERVIEW ════════════════════════════════ */}
           {activeTab === 'overview' && (
             <motion.div key="overview" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="space-y-8">
+
+              {/* ── KPI Strip ─────────────────────────────────────────────────────── */}
+              <StaggerContainer className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-4">
+                <StaggerItem><KPICard label="Total SKUs"        value={metrics.totalItems}       icon={Package}     color="#6366f1" /></StaggerItem>
+                <StaggerItem><KPICard label="Total Pieces"      value={metrics.totalPcs.toLocaleString()} icon={Box} color="#3b82f6" /></StaggerItem>
+                <StaggerItem><KPICard label="Total Value"       value={`₹${(metrics.totalAmount/10000000).toFixed(2)}Cr`} icon={BarChart2} color="#10b981" /></StaggerItem>
+                <StaggerItem><KPICard label="🔥 Bestsellers"    value={metrics.bestsellers}       icon={Star}        color="#f59e0b" sub="Top revenue movers" /></StaggerItem>
+                <StaggerItem><KPICard label="⚠️ Dead Stock"     value={metrics.deadStock}         icon={PackageX}    color="#ef4444" sub="Needs clearance action" /></StaggerItem>
+                <StaggerItem><KPICard label="🚨 Critical < 5"  value={metrics.critical}          icon={AlertTriangle} color="#8b5cf6" sub="Reorder immediately" /></StaggerItem>
+              </StaggerContainer>
 
               {/* ── 5 Category Quick-Access Panel ─────────────────────────────── */}
               <div className="space-y-4">
