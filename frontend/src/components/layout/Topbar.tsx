@@ -4,6 +4,8 @@ import { Input } from '../ui/input';
 import { Button } from '../ui/button';
 import { useAppStore } from '../../store';
 import { motion } from 'framer-motion';
+import { NotificationsDropdown } from './NotificationsDropdown';
+import { SettingsSheet } from './SettingsSheet';
 
 export function Topbar({ onMenuClick }: { onMenuClick?: () => void }) {
   const toggleInsightsPanel = useAppStore((state) => state.toggleInsightsPanel);
@@ -42,18 +44,8 @@ export function Topbar({ onMenuClick }: { onMenuClick?: () => void }) {
 
         <div className="h-8 w-px bg-slate-200 mx-0.5 md:mx-1" />
 
-        <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
-          <Button variant="ghost" size="icon" className="text-slate-500 hover:text-brand-primary hover:bg-brand-primary/10 rounded-xl relative h-9 w-9">
-            <Bell className="h-5 w-5" />
-            <span className="absolute top-2 right-2.5 h-2 w-2 bg-rose-500 rounded-full border-2 border-white" />
-          </Button>
-        </motion.div>
-
-        <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
-          <Button variant="ghost" size="icon" className="text-slate-500 hover:text-brand-primary hover:bg-brand-primary/10 rounded-xl h-9 w-9">
-            <Settings className="h-5 w-5" />
-          </Button>
-        </motion.div>
+        <NotificationsDropdown />
+        <SettingsSheet />
 
         {/* Company Badge */}
         <div className="flex items-center gap-2 md:gap-3 pl-2 md:pl-3 border-l border-slate-200">
