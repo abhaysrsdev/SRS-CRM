@@ -169,7 +169,7 @@ export function MasterDataCenter() {
             </div>
           </div>
 
-          <div className={`flex items-center gap-1 p-1 rounded-xl shadow-soft ${darkMode ? 'bg-slate-800' : 'bg-white'}`}>
+          <div className={`flex items-center gap-1 p-1 rounded-xl shadow-soft overflow-x-auto whitespace-nowrap scrollbar-hide w-full md:w-auto ${darkMode ? 'bg-slate-800' : 'bg-white'}`}>
             {[
               { id: 'records', label: 'Master Registries' },
               { id: 'territories', label: 'Territories & Cities' },
