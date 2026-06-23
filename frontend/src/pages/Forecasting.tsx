@@ -178,7 +178,7 @@ export function Forecasting() {
       <div className="max-w-[1700px] mx-auto px-8 py-8 space-y-8">
 
         {/* KPI Strip */}
-        <StaggerContainer className="grid grid-cols-2 xl:grid-cols-4 gap-5">
+        <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5">
           {kpis.map((kpi, i) => (
             <StaggerItem key={i}>
               <motion.div whileHover={{ y: -2 }} className="bg-white rounded-2xl p-5 border border-slate-100 shadow-soft flex items-start gap-4">
@@ -311,7 +311,7 @@ export function Forecasting() {
               <CardContent>
                 <div className="overflow-x-auto">
                   <div className="overflow-x-auto w-full -mx-4 sm:mx-0 px-4 sm:px-0 scrollbar-hide">
-<table className="w-full text-sm">
+<table className="w-full text-sm whitespace-nowrap">
                     <thead>
                       <tr className="border-b border-slate-100">
                         <th className="text-left py-2 px-3 text-xs font-black text-slate-400 uppercase">Item</th>

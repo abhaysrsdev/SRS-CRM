@@ -315,17 +315,17 @@ export function SystemGuide() {
                 initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ delay: i * 0.08 }}
-                className={`${seg.textBg} border border-opacity-20 rounded-2xl p-5 flex items-center gap-5 hover:shadow-sm transition-all`}
+                className={`${seg.textBg} border border-opacity-20 rounded-2xl p-4 md:p-5 flex flex-col md:flex-row md:items-center gap-2 md:gap-5 hover:shadow-sm transition-all`}
                 style={{ borderColor: seg.color + '40' }}
               >
-                <div className="flex items-center gap-3 min-w-[200px]">
+                <div className="flex items-center gap-3 md:min-w-[200px]">
                   <div className="w-5 h-5 rounded-full shadow-md shrink-0" style={{ backgroundColor: seg.color }} />
                   <span className="font-black text-slate-900 flex items-center gap-2">
                     <span className="text-xl">{seg.icon}</span>
                     {seg.label}
                   </span>
                 </div>
-                <ArrowRight className="h-4 w-4 text-slate-300 shrink-0" />
+                <ArrowRight className="hidden md:block h-4 w-4 text-slate-300 shrink-0" />
                 <p className={`text-sm ${seg.textColor} font-medium`}>{seg.meaning}</p>
               </motion.div>
             ))}

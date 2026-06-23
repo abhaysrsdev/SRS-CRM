@@ -30,6 +30,18 @@ import { RecommendationPanel } from '../components/crm/RecommendationPanel';
 import { getLehengaFallback } from '../lib/utils';
 import { API_BASE_URL } from '../lib/api';
 
+const extractDriveId = (url: string | null | undefined): string | null => {
+  if (!url) return null;
+  try { return new URL(url).searchParams.get('id'); } catch { return null; }
+};
+
+const getOptimizedImageUrl = (url: string | null | undefined, fallbackId: string) => {
+  if (!url) return getLehengaFallback(fallbackId);
+  const id = extractDriveId(url);
+  if (id) return `/catalog_thumbnails/${id}.webp`;
+  return url;
+};
+
 const SEGMENTS: ExtendedSegment[] = [
   'All Parties',
   'Purchased < 3 Times',
@@ -603,7 +615,7 @@ export function CustomerLists() {
                       <tbody className="divide-y divide-slate-50">
                         {customerSalesOrders.map((o) => {
                           const matchedProduct = products?.find(pr => pr.designCode === o.productCode);
-                          const imgUrl = matchedProduct?.imageUrl || getLehengaFallback(o.productCode);
+                          const imgUrl = getOptimizedImageUrl(matchedProduct?.imageUrl, o.productCode);
                           return (
                             <tr key={o.id} className="hover:bg-slate-50 transition-colors">
                               <td className="py-2 font-bold text-slate-700">#{o.orderNo}</td>
@@ -827,7 +839,7 @@ export function CustomerLists() {
                               className="absolute top-1.5 right-1.5 z-20 h-4 w-4 rounded border-white/50 bg-black/20 text-brand-primary focus:ring-brand-primary pointer-events-none"
                             />
                             <img 
-                              src={p.imageUrl || getLehengaFallback(p.id)} 
+                              src={getOptimizedImageUrl(p.imageUrl, p.id)} 
                               onError={(e) => { e.currentTarget.src = getLehengaFallback(p.id); }}
                               alt="" 
                               loading="lazy"
@@ -912,16 +924,9 @@ export function CustomerLists() {
 
                     // Fetch actual drive image using catalog folders
                     const folder = catalogFolders.find(f => f.folder_name === p.designCode);
-                    let driveImgUrl = p.imageUrl || getLehengaFallback(p.id);
-                    if (folder && folder.thumbnail_url) {
-                      try {
-                        const id = new URL(folder.thumbnail_url).searchParams.get('id');
-                        if (id) {
-                          driveImgUrl = `/catalog_thumbnails/${id}.webp`;
-                        } else {
-                          driveImgUrl = folder.thumbnail_url;
-                        }
-                      } catch {}
+                    let driveImgUrl = getOptimizedImageUrl(p.imageUrl, p.id);
+                    if (driveImgUrl.startsWith('http') && folder && folder.thumbnail_url) {
+                      driveImgUrl = getOptimizedImageUrl(folder.thumbnail_url, p.id);
                     }
                     
                     const colors = (p.color || '').split(/[,\/]/).map(c => c.trim()).filter(Boolean);
