@@ -4,7 +4,6 @@ import { Button } from '../ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '../ui/dropdown-menu';
@@ -41,7 +40,7 @@ export function NotificationsDropdown() {
       <DropdownMenuContent align="end" className="w-80 sm:w-96 p-0 rounded-2xl shadow-xl border-slate-100">
         <div className="p-4 border-b border-slate-100 bg-slate-50/50 flex items-center justify-between rounded-t-2xl">
           <div>
-            <DropdownMenuLabel className="p-0 text-base font-black text-slate-900">Notifications</DropdownMenuLabel>
+            <h3 className="p-0 text-base font-black text-slate-900">Notifications</h3>
             <p className="text-xs text-slate-500 font-medium">{unread} unread alerts</p>
           </div>
           {unread > 0 && (
