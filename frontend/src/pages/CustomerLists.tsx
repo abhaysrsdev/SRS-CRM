@@ -815,9 +815,9 @@ export function CustomerLists() {
                   return (
                     <StaggerItem
                       key={config.type}
-                      className="flex items-stretch gap-6 bg-white p-4 rounded-2xl border border-slate-100 shadow-[0_2px_10px_-4px_rgba(0,0,0,0.05)] hover:shadow-soft transition-shadow"
+                      className="flex flex-col md:flex-row md:items-stretch gap-4 md:gap-6 bg-white p-4 rounded-2xl border border-slate-100 shadow-[0_2px_10px_-4px_rgba(0,0,0,0.05)] hover:shadow-soft transition-shadow"
                     >
-                      <div className="w-48 shrink-0 flex flex-col justify-center gap-1">
+                      <div className="md:w-48 shrink-0 flex flex-col justify-center gap-1">
                         <h3 className={`font-bold text-sm ${config.color}`}>{config.title}</h3>
                         {rec?.reason && (
                           <p className="text-[10px] text-slate-400 leading-relaxed">{rec.reason}</p>
@@ -853,7 +853,7 @@ export function CustomerLists() {
                         ))}
                       </div>
 
-                      <div className="w-28 shrink-0 flex flex-col items-center justify-center gap-2 pl-2 border-l border-slate-100">
+                      <div className="md:w-28 shrink-0 flex flex-row md:flex-col items-center justify-center gap-2 pt-2 md:pt-0 pl-0 md:pl-2 border-t md:border-t-0 md:border-l border-slate-100">
                         {items.some(p => selectedImageIds.has(p.id)) && (
                           <Button
                             size="sm"

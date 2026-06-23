@@ -4,8 +4,6 @@ import { Button } from '../ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuGroup,
-  DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
@@ -60,7 +58,7 @@ export function NotificationsDropdown() {
             </div>
           ) : (
             notifications.map((notif) => (
-              <DropdownMenuItem key={notif.id} className="p-3 rounded-xl cursor-pointer hover:bg-slate-50 focus:bg-slate-50 group flex items-start gap-4 transition-colors">
+              <div key={notif.id} className="p-3 rounded-xl cursor-pointer hover:bg-slate-50 focus:bg-slate-50 group flex items-start gap-4 transition-colors">
                 <div className={`h-10 w-10 shrink-0 rounded-full flex items-center justify-center ${notif.bg}`}>
                   <notif.icon className={`h-5 w-5 ${notif.color}`} />
                 </div>
@@ -74,7 +72,7 @@ export function NotificationsDropdown() {
                 <button onClick={(e) => removeNotification(notif.id, e)} className="opacity-0 group-hover:opacity-100 p-1 hover:bg-slate-200 rounded-md transition-all absolute right-3 top-4">
                   <X className="h-3 w-3 text-slate-400" />
                 </button>
-              </DropdownMenuItem>
+              </div>
             ))
           )}
         </div>
