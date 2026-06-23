@@ -23,8 +23,8 @@ const prefetchFolderImages = async (folderId: number) => {
     const firstKey = Object.keys(parsed.colorViews).find(k => k.toLowerCase() === firstColor.toLowerCase()) || Object.keys(parsed.colorViews)[0];
     const firstViews = firstKey ? parsed.colorViews[firstKey] : [];
     [...parsed.aiPreviews.slice(0, 3).map(p => p.image), ...firstViews.map(v => v.image)].forEach(img => {
-      const id = extractDriveId(img.image_url);
-      if (id) { const l = new Image(); l.src = `${API_BASE_URL}/catalog/image-proxy?id=${id}&sz=800`; }
+      const id = new URLSearchParams(img.image_url.split('?')[1]).get('id');
+      if (id) { const l = new Image(); l.src = `/catalog_thumbnails/${id}.webp`; }
     });
   } catch {}
   _prefetchInFlight.delete(folderId);
@@ -231,7 +231,7 @@ export function Catalog() {
   const getImageUrl = (url: string, width: number = 800) => {
     if (!url) return '';
     const id = extractDriveId(url);
-    if (id) return `${API_BASE_URL}/catalog/image-proxy?id=${id}&sz=${width}`;
+    if (id) return `/catalog_thumbnails/${id}.webp`;
     return url;
   };
 

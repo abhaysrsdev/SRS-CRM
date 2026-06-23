@@ -913,7 +913,7 @@ export function CustomerLists() {
                       try {
                         const id = new URL(folder.thumbnail_url).searchParams.get('id');
                         if (id) {
-                          driveImgUrl = `${API_BASE_URL}/catalog/image-proxy?id=${id}&sz=600`;
+                          driveImgUrl = `/catalog_thumbnails/${id}.webp`;
                         } else {
                           driveImgUrl = folder.thumbnail_url;
                         }
