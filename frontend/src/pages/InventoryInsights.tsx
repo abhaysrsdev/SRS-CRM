@@ -192,7 +192,7 @@ export function InventoryInsights() {
     <div className="min-h-screen bg-brand-bg overflow-y-auto">
       {/* ── Header ───────────────────────────────────────────────────────────── */}
       <div className="sticky top-0 z-20 bg-white/80 backdrop-blur-xl border-b border-slate-200 shadow-sm">
-        <div className="max-w-[1700px] mx-auto px-8 py-5 flex items-center justify-between gap-6 flex-wrap">
+        <div className="max-w-[1700px] mx-auto px-8 py-5 flex items-center justify-between gap-6 flex-wrap flex-wrap gap-4">
           <FadeIn>
             <div className="flex items-center gap-4">
               <div className="h-12 w-12 bg-amber-100 text-amber-600 rounded-2xl flex items-center justify-center shadow-inner">
@@ -273,7 +273,7 @@ export function InventoryInsights() {
                           <div className="text-3xl mb-3">{emoji}</div>
                           <h4 className="font-black text-white text-sm leading-tight mb-1">{label}</h4>
                           {sub && <p className="text-white/70 text-[10px] font-medium mb-3">{sub}</p>}
-                          <div className="flex items-end justify-between mt-3">
+                          <div className="flex items-end justify-between mt-3 flex-wrap gap-4">
                             <div>
                               <div className="text-2xl font-black text-white">{count}</div>
                               <div className="text-white/70 text-[10px] font-bold uppercase">SKUs</div>
@@ -312,7 +312,7 @@ export function InventoryInsights() {
                       >
                         <div className="bg-white rounded-3xl border border-slate-100 shadow-soft overflow-hidden">
                           {/* Drawer Header */}
-                          <div className="flex items-center justify-between px-6 py-4 border-b border-slate-100" style={{ background: meta?.color + '10' }}>
+                          <div className="flex items-center justify-between px-6 py-4 border-b border-slate-100 flex-wrap gap-4" style={{ background: meta?.color + '10' }}>
                             <div className="flex items-center gap-3">
                               <div className="h-10 w-10 rounded-xl flex items-center justify-center" style={{ background: meta?.color + '20' }}>
                                 {meta && <meta.icon className="h-5 w-5" style={{ color: meta.color }} />}
@@ -332,7 +332,8 @@ export function InventoryInsights() {
 
                           {/* Item List */}
                           <div className="overflow-x-auto">
-                            <table className="w-full text-sm">
+                            <div className="overflow-x-auto w-full -mx-4 sm:mx-0 px-4 sm:px-0 scrollbar-hide">
+<table className="w-full text-sm">
                               <thead>
                                 <tr className="bg-slate-50 border-b border-slate-100">
                                   <th className="text-left px-5 py-3 text-xs font-black text-slate-400 uppercase tracking-wider w-8">#</th>
@@ -385,6 +386,7 @@ export function InventoryInsights() {
                                 ))}
                               </tbody>
                             </table>
+</div>
                           </div>
 
                           {/* Footer summary */}
@@ -428,7 +430,7 @@ export function InventoryInsights() {
                       </ResponsiveContainer>
                       <div className="space-y-2 mt-2">
                         {catPieData.map((d, i) => (
-                          <div key={i} className="flex items-center justify-between text-xs">
+                          <div key={i} className="flex items-center justify-between text-xs flex-wrap gap-4">
                             <span className="flex items-center gap-2 font-medium text-slate-600">
                               <span className="w-2.5 h-2.5 rounded-full" style={{ background: CAT_META[d.name]?.color || '#64748b' }} />
                               {d.name}
@@ -605,7 +607,7 @@ export function InventoryInsights() {
                       <div className="h-1.5 w-full" style={{ background: meta.color }} />
                       
                       <div className="p-4">
-                        <div className="flex items-start justify-between mb-3">
+                        <div className="flex items-start justify-between mb-3 flex-wrap gap-4">
                           <div>
                             <h4 className="font-black text-slate-900 text-lg leading-none">#{item.itemCode}</h4>
                             <p className="text-xs text-slate-500 mt-1 font-medium">{item.series || 'Classic Series'}</p>
@@ -718,7 +720,7 @@ export function InventoryInsights() {
                     >
                       <div className="h-2" style={{ background: meta.color }} />
                       <div className="p-6">
-                        <div className="flex items-start justify-between mb-4">
+                        <div className="flex items-start justify-between mb-4 flex-wrap gap-4">
                           <div className="flex items-center gap-3">
                             <div className="h-12 w-12 rounded-xl flex items-center justify-center" style={{ background: meta.color + '18' }}>
                               <meta.icon className="h-6 w-6" style={{ color: meta.color }} />
@@ -885,7 +887,7 @@ export function InventoryInsights() {
                         }`}>{bucket.label}</div>
                         <div className="text-3xl font-black text-slate-900">{bucket.items.length}</div>
                         <div className="text-xs text-slate-500 mt-1">SKUs</div>
-                        <div className="mt-3 border-t border-slate-100 pt-3 flex justify-between text-xs">
+                        <div className="mt-3 border-t border-slate-100 pt-3 flex justify-between text-xs flex-wrap gap-4">
                           <span className="text-slate-400">{bucket.totalPcs.toLocaleString()} pcs</span>
                           <span className="font-black text-slate-700">₹{(bucket.totalValue / 100000).toFixed(1)}L</span>
                         </div>
@@ -903,7 +905,8 @@ export function InventoryInsights() {
                       <span className="ml-auto font-black text-rose-700 text-sm">₹{(deadItems.reduce((s, i) => s + i.totalAmount, 0) / 100000).toFixed(1)}L at risk</span>
                     </div>
                     <div className="overflow-x-auto">
-                      <table className="w-full text-xs">
+                      <div className="overflow-x-auto w-full -mx-4 sm:mx-0 px-4 sm:px-0 scrollbar-hide">
+<table className="w-full text-xs">
                         <thead>
                           <tr className="border-b border-slate-50">
                             <th className="text-left px-4 py-2 text-slate-400 font-bold">Code</th>
@@ -931,6 +934,7 @@ export function InventoryInsights() {
                           ))}
                         </tbody>
                       </table>
+</div>
                     </div>
                   </div>
 
@@ -941,7 +945,8 @@ export function InventoryInsights() {
                       <span className="ml-auto font-black text-amber-700 text-sm">₹{(stuckItems.reduce((s, i) => s + i.totalAmount, 0) / 100000).toFixed(1)}L</span>
                     </div>
                     <div className="overflow-x-auto">
-                      <table className="w-full text-xs">
+                      <div className="overflow-x-auto w-full -mx-4 sm:mx-0 px-4 sm:px-0 scrollbar-hide">
+<table className="w-full text-xs">
                         <thead>
                           <tr className="border-b border-slate-50">
                             <th className="text-left px-4 py-2 text-slate-400 font-bold">Code</th>
@@ -969,6 +974,7 @@ export function InventoryInsights() {
                           ))}
                         </tbody>
                       </table>
+</div>
                     </div>
                   </div>
                 </div>
@@ -979,14 +985,14 @@ export function InventoryInsights() {
                     <h4 className="font-black text-emerald-800 text-sm mb-4 flex items-center gap-2"><TrendingUp className="h-4 w-4 text-emerald-600" /> Fast Moving Products (Top 10)</h4>
                     <div className="space-y-3">
                       {fastMovers.map((item) => (
-                        <div key={item.itemCode} className="flex flex-col sm:flex-row sm:items-center justify-between bg-emerald-50/30 p-3 rounded-xl border border-emerald-100/50 gap-3">
+                        <div key={item.itemCode} className="flex flex-col sm:flex-row sm:items-center justify-between bg-emerald-50/30 p-3 rounded-xl border border-emerald-100/50 gap-3 flex-wrap gap-4">
                           <div className="flex items-center gap-2 flex-wrap">
                             <span className="font-black text-slate-900 text-xs">#{item.itemCode}</span>
                             <span className="text-[10px] text-slate-500 font-semibold bg-white border border-slate-100 px-2 py-0.5 rounded-md">{item.series || 'Classic'}</span>
                             <span className="px-1.5 py-0.5 rounded-full text-[9px] font-bold bg-emerald-100 text-emerald-700">{item.category}</span>
                             <span className="px-1.5 py-0.5 rounded-full text-[9px] font-bold bg-indigo-50 text-indigo-700">{getTargetSection(item.category)}</span>
                           </div>
-                          <div className="flex items-center gap-3 justify-between sm:justify-end">
+                          <div className="flex items-center gap-3 justify-between sm:justify-end flex-wrap gap-4">
                             <div className="w-16 bg-slate-100 rounded-full h-1.5 overflow-hidden">
                               <div className="h-full bg-emerald-500 rounded-full" style={{ width: `${item.demandScore}%` }} />
                             </div>
@@ -1002,7 +1008,7 @@ export function InventoryInsights() {
                     <h4 className="font-black text-purple-800 text-sm mb-4 flex items-center gap-2"><AlertTriangle className="h-4 w-4 text-purple-600" /> 🚨 Low Stock Alerts</h4>
                     <div className="space-y-2">
                       {lowStock.slice(0, 10).map((item) => (
-                        <div key={item.itemCode} className="flex items-center justify-between bg-purple-50 rounded-lg px-3 py-2.5 border border-purple-100">
+                        <div key={item.itemCode} className="flex items-center justify-between bg-purple-50 rounded-lg px-3 py-2.5 border border-purple-100 flex-wrap gap-4">
                           <div className="flex items-center gap-2 flex-wrap min-w-0">
                             <span className="font-black text-slate-800 text-xs">#{item.itemCode}</span>
                             <span className="text-[10px] text-slate-500 font-semibold bg-white border border-slate-100 px-2 py-0.5 rounded-md truncate max-w-[80px]">{item.series || 'Classic'}</span>

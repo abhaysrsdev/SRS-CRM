@@ -139,7 +139,7 @@ function DropZone({
 
           {/* Content */}
           <div className="flex-1 min-w-0">
-            <div className="flex items-center justify-between gap-2">
+            <div className="flex items-center justify-between gap-2 flex-wrap gap-4">
               <h4 className="font-bold text-slate-900 text-sm">{sheet.label}</h4>
               {isSuccess && (
                 <button
@@ -535,7 +535,7 @@ export function DataHub() {
           >
             {/* Upload Center Header */}
             <FadeIn>
-              <div className="flex items-start justify-between gap-6">
+              <div className="flex items-start justify-between gap-6 flex-wrap gap-4">
                 <div>
                   <h3 className="text-2xl font-black text-slate-900 flex items-center gap-3">
                     <FileSpreadsheet className="h-7 w-7 text-brand-primary" />
@@ -613,7 +613,8 @@ export function DataHub() {
                     </CardTitle>
                   </CardHeader>
                   <CardContent className="p-0">
-                    <table className="w-full text-sm">
+                    <div className="overflow-x-auto w-full -mx-4 sm:mx-0 px-4 sm:px-0 scrollbar-hide">
+<table className="w-full text-sm">
                       <thead>
                         <tr className="border-b border-slate-100">
                           <th className="text-left px-5 py-3 text-xs font-black text-slate-400 uppercase">Sheet</th>
@@ -645,6 +646,7 @@ export function DataHub() {
                           })}
                       </tbody>
                     </table>
+</div>
                   </CardContent>
                 </Card>
               </FadeIn>

@@ -65,7 +65,7 @@ function AccordionSection({ title, icon: Icon, color, children }: any) {
     <div className="bg-white rounded-3xl shadow-soft border border-slate-100 overflow-hidden">
       <button
         onClick={() => setOpen(o => !o)}
-        className="w-full flex items-center justify-between p-6 hover:bg-slate-50/50 transition-colors"
+        className="w-full flex items-center justify-between p-6 hover:bg-slate-50/50 transition-colors flex-wrap gap-4"
       >
         <div className="flex items-center gap-4">
           <div className={`h-12 w-12 ${color} rounded-2xl flex items-center justify-center shadow-sm`}>

@@ -47,7 +47,7 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
       <div className="p-3">
         <p className="font-black text-slate-900 text-sm">#{product.designCode}</p>
         <p className="text-xs text-slate-500 mt-0.5 truncate">{product.name}</p>
-        <div className="flex items-center justify-between mt-2">
+        <div className="flex items-center justify-between mt-2 flex-wrap gap-4">
           <span className="text-xs bg-slate-100 text-slate-600 px-2 py-0.5 rounded-full font-bold">{product.priceBucket}</span>
           <span className="text-xs font-bold text-indigo-600">{product.color}</span>
         </div>
@@ -230,7 +230,7 @@ export function CatalogBuilder() {
         {activeCatalog && catalogProducts.length > 0 && (
           <FadeIn delay={0.15}>
             <div className="space-y-4">
-              <div className="flex items-center justify-between">
+              <div className="flex items-center justify-between flex-wrap gap-4">
                 <div>
                   <h2 className="font-black text-slate-900 text-lg">
                     {catalogDef?.emoji} {catalogDef?.label}
@@ -252,7 +252,7 @@ export function CatalogBuilder() {
               </div>
 
               {/* Share Footer */}
-              <div className="bg-white rounded-2xl border border-slate-100 shadow-soft p-5 flex items-center justify-between gap-4">
+              <div className="bg-white rounded-2xl border border-slate-100 shadow-soft p-5 flex items-center justify-between gap-4 flex-wrap gap-4">
                 <div>
                   <p className="font-bold text-slate-900 text-sm">{catalogProducts.length} Products Ready</p>
                   <p className="text-xs text-slate-500">Copy text catalog or export as PDF</p>

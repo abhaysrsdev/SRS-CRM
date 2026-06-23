@@ -109,7 +109,7 @@ export function Interactions() {
               className="fixed inset-0 z-50 flex items-center justify-center p-4 pointer-events-none"
             >
               <div className="w-full max-w-md bg-white rounded-3xl shadow-2xl p-6 max-h-full overflow-y-auto scrollbar-hide pointer-events-auto">
-              <div className="flex items-center justify-between mb-5">
+              <div className="flex items-center justify-between mb-5 flex-wrap gap-4">
                 <h3 className="font-black text-slate-900 text-lg">Log Interaction</h3>
                 <button onClick={() => setShowLogModal(false)} className="h-8 w-8 bg-slate-100 rounded-full flex items-center justify-center hover:bg-slate-200 transition-colors">
                   <X className="h-4 w-4 text-slate-500" />
@@ -220,18 +220,18 @@ export function Interactions() {
           {filtered.map((interaction, i) => {
             const config = TYPE_CONFIGS[interaction.type] || TYPE_CONFIGS.note;
             return (
-              <StaggerItem key={i} className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
+              <StaggerItem key={i} className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active flex-wrap gap-4">
                 <div className={`flex items-center justify-center w-10 h-10 rounded-full border-4 border-white ${config.color} shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 shadow-md z-10 relative left-0 md:left-1/2`}>
                   <config.icon className="h-4 w-4" />
                 </div>
 
                 <div className="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] bg-white p-5 rounded-2xl shadow-soft border border-slate-100 hover:shadow-md hover:border-brand-primary/20 transition-all">
-                  <div className="flex items-center justify-between mb-2">
+                  <div className="flex items-center justify-between mb-2 flex-wrap gap-4">
                     <span className="font-bold text-slate-900 text-sm">{interaction.party}</span>
                     <span className="text-xs font-semibold text-slate-400 bg-slate-50 px-2 py-1 rounded-md">{interaction.time}</span>
                   </div>
                   <p className="text-slate-600 text-sm">{interaction.text}</p>
-                  <div className="mt-3 flex items-center justify-between text-xs text-slate-400 font-medium">
+                  <div className="mt-3 flex items-center justify-between text-xs text-slate-400 font-medium flex-wrap gap-4">
                     <span>By {interaction.user}</span>
                     <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold ${config.color}`}>
                       {config.label}

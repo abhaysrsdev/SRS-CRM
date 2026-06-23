@@ -81,7 +81,7 @@ export function Dashboard() {
           >
             <div className="absolute inset-0 bg-gradient-to-br from-white to-slate-50 opacity-0 group-hover:opacity-100 transition-opacity" />
             <div className="p-5 relative z-10">
-              <div className="flex flex-row items-center justify-between pb-2">
+              <div className="flex flex-row items-center justify-between pb-2 flex-wrap gap-4">
                 <h3 className="text-sm font-semibold text-slate-500">{kpi.title}</h3>
                 <div className={`p-2.5 rounded-xl ${kpi.bgColor}`}><kpi.icon className={`h-4 w-4 ${kpi.color}`} /></div>
               </div>

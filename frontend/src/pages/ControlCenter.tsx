@@ -188,7 +188,7 @@ export function ControlCenter() {
     <div className={`min-h-screen pb-12 transition-colors duration-300 ${darkMode ? 'dark bg-slate-950 text-slate-100' : 'bg-brand-bg text-slate-900'}`}>
       {/* Subheader */}
       <div className={`px-8 py-5 border-b shadow-inner ${darkMode ? 'bg-slate-900/60 border-slate-800' : 'bg-slate-50 border-slate-200'}`}>
-        <div className="max-w-[1700px] mx-auto flex flex-wrap items-center justify-between gap-6">
+        <div className="max-w-[1700px] mx-auto flex flex-wrap items-center justify-between gap-6 flex-wrap gap-4">
           <div className="flex items-center gap-3">
             <div className="h-10 w-10 bg-gradient-to-tr from-brand-primary to-indigo-600 rounded-xl flex items-center justify-center text-white shadow-md">
               <Settings className="h-5 w-5" />
@@ -236,7 +236,7 @@ export function ControlCenter() {
                 </CardTitle>
                 <div className="space-y-3.5 mb-6 max-h-80 overflow-y-auto pr-1">
                   {users.map((u) => (
-                    <div key={u.id} className="p-3 bg-slate-50 dark:bg-slate-800 rounded-xl flex justify-between items-center border border-slate-100 dark:border-slate-800 text-xs font-semibold">
+                    <div key={u.id} className="p-3 bg-slate-50 dark:bg-slate-800 rounded-xl flex justify-between items-center border border-slate-100 dark:border-slate-800 text-xs font-semibold flex-wrap gap-4">
                       <div>
                         <span className="font-bold text-slate-800 dark:text-white block">{u.name}</span>
                         <span className="text-[10px] text-slate-400 block mt-0.5">{u.email} | Role: {u.role}</span>
@@ -320,7 +320,7 @@ export function ControlCenter() {
                 </CardTitle>
                 <div className="space-y-3.5 text-xs">
                   {companies.map(c => (
-                    <div key={c.id} className="p-3 bg-slate-50 dark:bg-slate-800 rounded-xl flex items-center justify-between border border-slate-100 dark:border-slate-800 font-semibold">
+                    <div key={c.id} className="p-3 bg-slate-50 dark:bg-slate-800 rounded-xl flex items-center justify-between border border-slate-100 dark:border-slate-800 font-semibold flex-wrap gap-4">
                       <div>
                         <strong className="text-slate-800 dark:text-white block">{c.name}</strong>
                         <span className="text-[10px] text-slate-400 block mt-0.5">GSTIN: {c.gst} | DB: {c.db}</span>
@@ -340,7 +340,7 @@ export function ControlCenter() {
                 </CardTitle>
                 <div className="space-y-3 max-h-60 overflow-y-auto mb-4 pr-1 text-xs">
                   {territories.map((t, idx) => (
-                    <div key={idx} className="p-3 bg-slate-50 dark:bg-slate-800 rounded-xl flex justify-between border border-slate-100 dark:border-slate-800 font-semibold">
+                    <div key={idx} className="p-3 bg-slate-50 dark:bg-slate-800 rounded-xl flex justify-between border border-slate-100 dark:border-slate-800 font-semibold flex-wrap gap-4">
                       <span>Region: <strong>{t.state}</strong></span>
                       <span>Representative assigned: <strong>{t.representative}</strong></span>
                     </div>
@@ -373,7 +373,7 @@ export function ControlCenter() {
                 </CardTitle>
                 <div className="space-y-3 mb-6 max-h-60 overflow-y-auto pr-1 text-xs">
                   {workflows.map(wf => (
-                    <div key={wf.id} className="p-3 bg-slate-50 dark:bg-slate-800 rounded-xl flex justify-between border border-slate-100 dark:border-slate-800 font-semibold">
+                    <div key={wf.id} className="p-3 bg-slate-50 dark:bg-slate-800 rounded-xl flex justify-between border border-slate-100 dark:border-slate-800 font-semibold flex-wrap gap-4">
                       <div>
                         <span className="font-bold text-slate-800 dark:text-white block">{wf.name}</span>
                         <p className="text-[10px] text-slate-400 mt-1">IF: {wf.trigger} | THEN: {wf.action}</p>
@@ -418,7 +418,7 @@ export function ControlCenter() {
                   {approvalRules.map(rule => (
                     <div key={rule.id} className="p-3 bg-slate-50 dark:bg-slate-800 rounded-xl border border-slate-100 dark:border-slate-800">
                       <strong className="block text-slate-800 dark:text-white mb-1">{rule.scope} Override</strong>
-                      <div className="flex justify-between text-[10px]">
+                      <div className="flex justify-between text-[10px] flex-wrap gap-4">
                         <span>Threshold: {rule.limit}</span>
                         <span>Authority: {rule.authority}</span>
                       </div>
@@ -452,7 +452,7 @@ export function ControlCenter() {
                   {selectedPortalCustomer && (
                     <div className="bg-slate-50 dark:bg-slate-800 p-4 rounded-xl border border-slate-100 dark:border-slate-800 space-y-3">
                       <strong className="text-slate-800 dark:text-white uppercase tracking-wider text-[10px] block">Portal view of {selectedPortalCustomer}</strong>
-                      <div className="flex justify-between text-[10px] font-bold">
+                      <div className="flex justify-between text-[10px] font-bold flex-wrap gap-4">
                         <span>Dispatch Progress: <span className="text-indigo-600">80% Fulfillment</span></span>
                         <span>Pending Balance: <span className="text-rose-500">₹85,000</span></span>
                       </div>
@@ -482,7 +482,7 @@ export function ControlCenter() {
                   <div className="space-y-2">
                     <span className="font-bold text-slate-400 block text-[10px] uppercase">Active Recovery tickets</span>
                     {customerTickets.map((t, idx) => (
-                      <div key={idx} className="p-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-100 dark:border-slate-800 rounded-lg flex justify-between items-center text-[10px]">
+                      <div key={idx} className="p-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-100 dark:border-slate-800 rounded-lg flex justify-between items-center text-[10px] flex-wrap gap-4">
                         <div>
                           <strong>{t.customerName}</strong>
                           <p className="text-slate-500">{t.issue}</p>
@@ -517,15 +517,15 @@ export function ControlCenter() {
                     <div className="bg-slate-50 dark:bg-slate-800 p-4 rounded-xl border border-slate-100 dark:border-slate-800 space-y-3 font-semibold text-slate-700 dark:text-slate-300">
                       <strong className="text-slate-800 dark:text-white uppercase tracking-wider text-[10px] block">Portal view of {selectedPortalBroker}</strong>
                       <div className="space-y-2">
-                        <div className="flex justify-between">
+                        <div className="flex justify-between flex-wrap gap-4">
                           <span>Brokerage Tier:</span>
                           <strong>Premium Catalog tier (5%)</strong>
                         </div>
-                        <div className="flex justify-between">
+                        <div className="flex justify-between flex-wrap gap-4">
                           <span>Total Tracked Revenue:</span>
                           <strong className="text-slate-900 dark:text-white">₹4,25,000</strong>
                         </div>
-                        <div className="flex justify-between">
+                        <div className="flex justify-between flex-wrap gap-4">
                           <span>Calculated Broker Commission:</span>
                           <strong className="text-emerald-600">₹21,250</strong>
                         </div>
@@ -545,7 +545,7 @@ export function ControlCenter() {
                   <MessageSquare className="h-4 w-4 text-emerald-500" /> WhatsApp Integration
                 </CardTitle>
                 <div className="text-xs space-y-3">
-                  <div className="flex justify-between items-center bg-emerald-50 dark:bg-emerald-950/20 p-2.5 rounded-xl text-emerald-800 dark:text-emerald-200 border border-emerald-100 dark:border-emerald-900 font-bold">
+                  <div className="flex justify-between items-center bg-emerald-50 dark:bg-emerald-950/20 p-2.5 rounded-xl text-emerald-800 dark:text-emerald-200 border border-emerald-100 dark:border-emerald-900 font-bold flex-wrap gap-4">
                     <span>Meta Business Status</span>
                     <span>✓ Connected</span>
                   </div>
@@ -602,7 +602,7 @@ export function ControlCenter() {
                   <RefreshCw className="h-4 w-4 text-brand-primary" /> Backup & Archiving Center
                 </CardTitle>
                 <div className="text-xs space-y-3">
-                  <div className="p-3 bg-slate-50 dark:bg-slate-800 rounded-xl border dark:border-slate-800 flex justify-between items-center">
+                  <div className="p-3 bg-slate-50 dark:bg-slate-800 rounded-xl border dark:border-slate-800 flex justify-between items-center flex-wrap gap-4">
                     <div>
                       <span className="font-bold text-slate-800 dark:text-white block">Full Database Backup</span>
                       <span className="text-[10px] text-slate-400">Includes audit logs, permissions and tasks.</span>
@@ -612,7 +612,7 @@ export function ControlCenter() {
                     </button>
                   </div>
 
-                  <div className="p-3 bg-slate-50 dark:bg-slate-800 rounded-xl border dark:border-slate-800 flex justify-between items-center">
+                  <div className="p-3 bg-slate-50 dark:bg-slate-800 rounded-xl border dark:border-slate-800 flex justify-between items-center flex-wrap gap-4">
                     <div>
                       <span className="font-bold text-slate-800 dark:text-white block">Database Archiving</span>
                       <span className="text-[10px] text-slate-400">Orders older than 12 months will be offloaded.</span>
@@ -703,7 +703,8 @@ export function ControlCenter() {
                   </CardTitle>
                 </CardHeader>
                 <div className="overflow-y-auto flex-1">
-                  <table className="w-full text-left text-xs border-collapse font-semibold">
+                  <div className="overflow-x-auto w-full -mx-4 sm:mx-0 px-4 sm:px-0 scrollbar-hide">
+<table className="w-full text-left text-xs border-collapse font-semibold">
                     <thead>
                       <tr className="bg-slate-50 dark:bg-slate-800 border-b border-slate-100 dark:border-slate-800 text-slate-400 font-bold uppercase">
                         <th className="px-5 py-3">Timestamp</th>
@@ -725,6 +726,7 @@ export function ControlCenter() {
                       ))}
                     </tbody>
                   </table>
+</div>
                 </div>
               </Card>
             </motion.div>

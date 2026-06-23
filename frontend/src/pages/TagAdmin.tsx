@@ -86,7 +86,7 @@ export function TagAdmin() {
             
             <div className="space-y-2 mt-4 max-h-60 overflow-y-auto scrollbar-hide">
               {tags.map(tag => (
-                <div key={tag.id} className="flex items-center justify-between bg-white border p-3 rounded-xl">
+                <div key={tag.id} className="flex items-center justify-between bg-white border p-3 rounded-xl flex-wrap gap-4">
                   <div>
                     <p className="font-bold text-sm text-slate-800">{tag.name}</p>
                     <p className="text-xs text-slate-400">Weight: {tag.weight}</p>

@@ -182,7 +182,7 @@ export function SalesOrders() {
     <div className="min-h-screen bg-brand-bg pb-12">
       {/* ── Page Header ──────────────────────────────────────────────────────── */}
       <div className="sticky top-0 z-20 bg-white/80 backdrop-blur-xl border-b border-slate-200 shadow-sm px-8 py-5">
-        <div className="max-w-[1700px] mx-auto flex items-center justify-between gap-6 flex-wrap">
+        <div className="max-w-[1700px] mx-auto flex items-center justify-between gap-6 flex-wrap flex-wrap gap-4">
           <FadeIn>
             <div className="flex items-center gap-4">
               <div className="h-12 w-12 bg-indigo-100 text-indigo-600 rounded-2xl flex items-center justify-center shadow-inner">
@@ -323,7 +323,7 @@ export function SalesOrders() {
                 </ResponsiveContainer>
                 <div className="space-y-2 mt-4">
                   {chartData.statusData.map((d) => (
-                    <div key={d.name} className="flex items-center justify-between text-xs font-semibold text-slate-700">
+                    <div key={d.name} className="flex items-center justify-between text-xs font-semibold text-slate-700 flex-wrap gap-4">
                       <span className="flex items-center gap-2">
                         <span className="h-3 w-3 rounded-full" style={{ backgroundColor: d.color }} />
                         {d.name}
@@ -339,7 +339,7 @@ export function SalesOrders() {
 
         {/* ── Main Data View ─────────────────────────────────────────────────── */}
         <Card className="shadow-soft border-slate-100 rounded-2xl overflow-hidden">
-          <div className="p-6 bg-slate-50 border-b border-slate-100 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+          <div className="p-6 bg-slate-50 border-b border-slate-100 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between flex-wrap gap-4">
             {/* Tabs */}
             <div className="flex items-center gap-1 bg-slate-200/60 p-1 rounded-xl w-fit">
               {[
@@ -374,7 +374,8 @@ export function SalesOrders() {
           </div>
 
           <div className="overflow-x-auto">
-            <table className="w-full text-left text-sm border-collapse">
+            <div className="overflow-x-auto w-full -mx-4 sm:mx-0 px-4 sm:px-0 scrollbar-hide">
+<table className="w-full text-left text-sm border-collapse">
               <thead>
                 <tr className="bg-white border-b border-slate-100 text-xs font-black text-slate-400 uppercase tracking-wider">
                   <th className="px-6 py-4">Order No</th>
@@ -528,9 +529,10 @@ export function SalesOrders() {
                 )}
               </tbody>
             </table>
+</div>
           </div>
 
-          <div className="px-6 py-4 bg-slate-50 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-slate-400">
+          <div className="px-6 py-4 bg-slate-50 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-slate-400 flex-wrap gap-4">
             <span>Showing {filteredOrders.length} of {salesOrders?.length || 0} orders</span>
             <div className="flex gap-2">
               <span className="text-[10px] font-black text-slate-400">SORT BY:</span>

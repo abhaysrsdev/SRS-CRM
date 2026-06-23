@@ -367,7 +367,7 @@ export function CustomerLists() {
                 {isActive && (
                   <motion.div layoutId="activeTab" className="absolute inset-0 bg-brand-primary z-0" />
                 )}
-                <span className="relative z-10 flex items-center justify-between">
+                <span className="relative z-10 flex items-center justify-between flex-wrap gap-4">
                   <span className="flex items-center gap-2">
                     <span className="text-base">{SEGMENT_EMOJIS[segment]}</span>
                     {segment}
@@ -409,7 +409,7 @@ export function CustomerLists() {
               onChange={(e) => setSearchTerm(e.target.value)}
             />
           </div>
-          <div className="flex justify-between items-center text-xs">
+          <div className="flex justify-between items-center text-xs flex-wrap gap-4">
             <span className="text-slate-500 font-medium">Showing {filteredCustomers.length} parties</span>
             <Badge
               variant="secondary"
@@ -450,7 +450,7 @@ export function CustomerLists() {
                     }`}
                   >
                     <div className="font-bold text-slate-900 text-sm mb-1.5 truncate pr-4">{customer.name}</div>
-                    <div className="flex justify-between items-center text-xs">
+                    <div className="flex justify-between items-center text-xs flex-wrap gap-4">
                       <span className="flex items-center gap-1.5">
                         <span className="text-slate-500">Score:</span>
                         <span className={`font-bold px-1.5 py-0.5 rounded-md ${getScoreColor(score)}`}>
@@ -507,7 +507,7 @@ export function CustomerLists() {
 
                   {/* Party Score Bar */}
                   <div className="mb-4">
-                    <div className="flex justify-between items-center mb-1">
+                    <div className="flex justify-between items-center mb-1 flex-wrap gap-4">
                       <span className="text-xs font-bold text-slate-500">Party Score</span>
                       <span className={`text-sm font-black px-2 py-0.5 rounded-lg ${getScoreColor(selectedScore)}`}>{selectedScore}/100</span>
                     </div>
@@ -522,19 +522,19 @@ export function CustomerLists() {
                   </div>
 
                   <div className="space-y-2 text-sm text-slate-600">
-                    <p className="flex justify-between border-b border-slate-50 pb-2">
+                    <p className="flex justify-between border-b border-slate-50 pb-2 flex-wrap gap-4">
                       <span className="text-slate-400">Mobile</span>
                       <span className="font-medium text-slate-900">{selectedCustomer.mobileNumber}</span>
                     </p>
-                    <p className="flex justify-between border-b border-slate-50 pb-2">
+                    <p className="flex justify-between border-b border-slate-50 pb-2 flex-wrap gap-4">
                       <span className="text-slate-400">State</span>
                       <span className="font-medium text-slate-900">{selectedCustomer.state}</span>
                     </p>
-                    <p className="flex justify-between border-b border-slate-50 pb-2">
+                    <p className="flex justify-between border-b border-slate-50 pb-2 flex-wrap gap-4">
                       <span className="text-slate-400">Business</span>
                       <span className="font-medium text-slate-900">{selectedCustomer.businessType}</span>
                     </p>
-                    <p className="flex justify-between">
+                    <p className="flex justify-between flex-wrap gap-4">
                       <span className="text-slate-400">GST</span>
                       <span className="font-mono text-xs text-slate-700">{selectedCustomer.gstNumber}</span>
                     </p>
@@ -554,7 +554,7 @@ export function CustomerLists() {
                   ) : (
                     <div className="space-y-3 text-sm flex-1">
                       {purchases?.slice(0, 3).map((p) => (
-                        <div key={p.id} className="flex justify-between items-center group">
+                        <div key={p.id} className="flex justify-between items-center group flex-wrap gap-4">
                           <span className="text-slate-600 truncate pr-3 group-hover:text-brand-primary transition-colors">{p.productName}</span>
                           <span className="font-bold text-slate-900 bg-slate-50 px-2 py-1 rounded-md">x{p.quantity}</span>
                         </div>
@@ -573,7 +573,7 @@ export function CustomerLists() {
               {/* ── Active Sales Orders Section ────────────────────────────────── */}
               {customerSalesOrders && customerSalesOrders.length > 0 && (
                 <div className="bg-white rounded-2xl border border-slate-100 shadow-soft overflow-hidden">
-                  <div className="p-5 border-b border-slate-100 bg-slate-50/50 flex items-center justify-between">
+                  <div className="p-5 border-b border-slate-100 bg-slate-50/50 flex items-center justify-between flex-wrap gap-4">
                     <div className="flex items-center gap-3">
                       <div className="h-9 w-9 bg-indigo-50 rounded-xl flex items-center justify-center">
                         <ShoppingBag className="h-5 w-5 text-indigo-600" />
@@ -588,7 +588,8 @@ export function CustomerLists() {
                     </span>
                   </div>
                   <div className="p-5 overflow-x-auto">
-                    <table className="w-full text-xs">
+                    <div className="overflow-x-auto w-full -mx-4 sm:mx-0 px-4 sm:px-0 scrollbar-hide">
+<table className="w-full text-xs">
                       <thead>
                         <tr className="border-b border-slate-100 text-left text-slate-400 font-bold">
                           <th className="py-2">Order No</th>
@@ -630,6 +631,7 @@ export function CustomerLists() {
                         })}
                       </tbody>
                     </table>
+</div>
                   </div>
                 </div>
               )}
@@ -638,7 +640,7 @@ export function CustomerLists() {
               <div className="bg-white rounded-2xl border border-slate-100 shadow-soft overflow-hidden">
                 <button
                   onClick={() => setShowIntelligence((v) => !v)}
-                  className="w-full flex items-center justify-between p-5 hover:bg-slate-50 transition-colors"
+                  className="w-full flex items-center justify-between p-5 hover:bg-slate-50 transition-colors flex-wrap gap-4"
                 >
                   <div className="flex items-center gap-3">
                     <div className="h-9 w-9 bg-gradient-to-br from-brand-primary to-brand-secondary rounded-xl flex items-center justify-center">
@@ -758,7 +760,8 @@ export function CustomerLists() {
                         <div className="border-t border-slate-100 px-5 pb-5">
                           <p className="text-xs font-black text-slate-400 uppercase tracking-wider mb-3 mt-4">Last {Math.min(10, purchases.length)} Purchases</p>
                           <div className="overflow-x-auto">
-                            <table className="w-full text-xs">
+                            <div className="overflow-x-auto w-full -mx-4 sm:mx-0 px-4 sm:px-0 scrollbar-hide">
+<table className="w-full text-xs">
                               <thead>
                                 <tr className="border-b border-slate-100">
                                   <th className="text-left py-2 text-slate-400 font-bold">Product</th>
@@ -778,6 +781,7 @@ export function CustomerLists() {
                                 ))}
                               </tbody>
                             </table>
+</div>
                           </div>
                         </div>
                       )}
@@ -866,7 +870,7 @@ export function CustomerLists() {
 
               {/* ── Direct WhatsApp Copy-Paste & Media Hub ── */}
               <FadeIn delay={0.4} className="bg-[#131722] rounded-3xl p-6 text-white shadow-xl relative overflow-hidden">
-                <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+                <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6 flex-wrap gap-4">
                   <div>
                     <h3 className="text-lg font-black flex items-center gap-2">
                       <Zap className="h-5 w-5 text-emerald-400" />

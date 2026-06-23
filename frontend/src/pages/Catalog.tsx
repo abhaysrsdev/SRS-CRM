@@ -296,7 +296,7 @@ export function Catalog() {
   return (
     <div className="p-4 md:p-8 space-y-6 max-w-[1700px] mx-auto pb-16 bg-slate-50 min-h-screen">
       {/* Top Header */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-white p-5 rounded-2xl border border-slate-100 shadow-sm">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-white p-5 rounded-2xl border border-slate-100 shadow-sm flex-wrap gap-4">
         <div className="flex items-center gap-4">
           <div className="h-10 w-10 bg-indigo-50 text-indigo-600 flex items-center justify-center rounded-xl shadow-inner border border-indigo-100">
             <Package className="h-5 w-5" />
@@ -354,9 +354,9 @@ export function Catalog() {
               )}
             </div>
 
-            <div className="p-3.5 flex-1 flex flex-col justify-between">
+            <div className="p-3.5 flex-1 flex flex-col justify-between flex-wrap gap-4">
               <div>
-                <div className="flex justify-between items-start mb-0.5">
+                <div className="flex justify-between items-start mb-0.5 flex-wrap gap-4">
                   <h4 className="font-black text-slate-900 text-sm truncate leading-none">
                     #{folder.folder_name}
                   </h4>
@@ -395,7 +395,7 @@ export function Catalog() {
               className="bg-white rounded-[24px] overflow-hidden shadow-2xl max-w-5xl w-full flex flex-col max-h-[92vh]"
             >
               {/* Modal Header */}
-              <div className="px-6 py-4 border-b border-slate-100 flex justify-between items-start shrink-0">
+              <div className="px-6 py-4 border-b border-slate-100 flex justify-between items-start shrink-0 flex-wrap gap-4">
                 <div>
                   <h3 className="font-black text-slate-900 text-xl leading-none mb-1">
                     #{selectedFolder.folder_name}

@@ -87,7 +87,7 @@ export function Help() {
                   ))}
                 </div>
 
-                <div className="mt-8 pt-6 border-t border-slate-100 flex items-center justify-between bg-brand-primary/5 p-4 rounded-xl border-brand-primary/10">
+                <div className="mt-8 pt-6 border-t border-slate-100 flex items-center justify-between bg-brand-primary/5 p-4 rounded-xl border-brand-primary/10 flex-wrap gap-4">
                   <div>
                     <h4 className="font-bold text-slate-900 text-sm">Still have questions?</h4>
                     <p className="text-xs text-slate-500">Our support team is ready to help.</p>

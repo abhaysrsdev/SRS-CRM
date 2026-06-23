@@ -126,7 +126,7 @@ export function Reminders() {
     <div className="h-[calc(100vh-4rem)] flex flex-col bg-brand-bg relative overflow-hidden">
 
       {/* Header */}
-      <div className="p-8 pb-4 shrink-0 bg-white/50 backdrop-blur-md border-b border-slate-200 shadow-sm z-10 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div className="p-8 pb-4 shrink-0 bg-white/50 backdrop-blur-md border-b border-slate-200 shadow-sm z-10 flex flex-col sm:flex-row sm:items-center justify-between gap-4 flex-wrap gap-4">
         <FadeIn>
           <h2 className="text-3xl font-bold tracking-tight text-slate-900 flex items-center gap-3">
             <Bell className="h-8 w-8 text-brand-primary" />
@@ -183,7 +183,7 @@ export function Reminders() {
                     <div className={`absolute left-0 top-0 bottom-0 w-1 ${list.headerColor} opacity-50 group-hover:opacity-100 transition-opacity`} />
 
                     <div
-                      className="flex justify-between items-start mb-2 pl-2 cursor-pointer"
+                      className="flex justify-between items-start mb-2 pl-2 cursor-pointer flex-wrap gap-4"
                       onClick={() => navigate('/crm-lists', { state: { customerId: reminder.id } })}
                     >
                       <h4 className="font-bold text-slate-900 text-sm leading-tight pr-4 group-hover:text-brand-primary transition-colors">{reminder.name}</h4>
@@ -196,7 +196,7 @@ export function Reminders() {
                       {reminder.notes}
                     </p>
 
-                    <div className="flex justify-between items-center text-xs pl-2">
+                    <div className="flex justify-between items-center text-xs pl-2 flex-wrap gap-4">
                       <span className="text-slate-400 truncate max-w-[120px]">{reminder.mobile}</span>
                       <div className="flex items-center gap-2">
                         <span className="font-semibold text-slate-700 bg-slate-100 px-2 py-1 rounded-md">Score: {reminder.score}</span>

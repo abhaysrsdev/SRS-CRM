@@ -158,7 +158,7 @@ export function MasterDataCenter() {
       
       {/* Tab Navigation header */}
       <div className={`px-8 py-5 border-b shadow-inner ${darkMode ? 'bg-slate-900/60 border-slate-800' : 'bg-slate-50 border-slate-200'}`}>
-        <div className="max-w-[1700px] mx-auto flex flex-wrap items-center justify-between gap-6">
+        <div className="max-w-[1700px] mx-auto flex flex-wrap items-center justify-between gap-6 flex-wrap gap-4">
           <div className="flex items-center gap-3">
             <div className="h-10 w-10 bg-gradient-to-tr from-brand-primary to-indigo-600 rounded-xl flex items-center justify-center text-white shadow-md">
               <BookOpen className="h-5 w-5" />
@@ -208,7 +208,8 @@ export function MasterDataCenter() {
                     <Users className="h-4 w-4 text-brand-primary" /> Customers Master
                   </CardTitle>
                   <div className="overflow-x-auto">
-                    <table className="w-full text-left border-collapse">
+                    <div className="overflow-x-auto w-full -mx-4 sm:mx-0 px-4 sm:px-0 scrollbar-hide">
+<table className="w-full text-left border-collapse">
                       <thead>
                         <tr className="border-b dark:border-slate-800 text-slate-400 font-bold uppercase text-[10px]">
                           <th className="py-2.5 px-3">Customer</th>
@@ -240,6 +241,7 @@ export function MasterDataCenter() {
                         ))}
                       </tbody>
                     </table>
+</div>
                   </div>
 
                   {/* Customer Creator form */}
@@ -269,7 +271,7 @@ export function MasterDataCenter() {
                   </CardTitle>
                   <div className="space-y-3.5 max-h-96 overflow-y-auto pr-1">
                     {productsList.map(p => (
-                      <div key={p.sku} className="p-3 bg-slate-50 dark:bg-slate-800 border dark:border-slate-750 rounded-xl flex justify-between items-center">
+                      <div key={p.sku} className="p-3 bg-slate-50 dark:bg-slate-800 border dark:border-slate-750 rounded-xl flex justify-between items-center flex-wrap gap-4">
                         <div>
                           <span className="font-bold text-slate-900 dark:text-white block">{p.name}</span>
                           <span className="text-[10px] text-slate-400 block mt-0.5">SKU: {p.sku} | Category: {p.category}</span>
@@ -289,7 +291,7 @@ export function MasterDataCenter() {
                   </CardTitle>
                   <div className="space-y-3.5">
                     {brokersList.map((b, idx) => (
-                      <div key={idx} className="p-3 bg-slate-50 dark:bg-slate-800 rounded-xl flex justify-between border dark:border-slate-850">
+                      <div key={idx} className="p-3 bg-slate-50 dark:bg-slate-800 rounded-xl flex justify-between border dark:border-slate-850 flex-wrap gap-4">
                         <div>
                           <strong>{b.name}</strong>
                           <span className="text-[10px] text-slate-400 block mt-0.5">Active Client Accounts: {b.activeAccounts}</span>
@@ -306,7 +308,7 @@ export function MasterDataCenter() {
                   </CardTitle>
                   <div className="space-y-3.5">
                     {salesmenList.map((s, idx) => (
-                      <div key={idx} className="p-3 bg-slate-50 dark:bg-slate-800 rounded-xl flex justify-between border dark:border-slate-850">
+                      <div key={idx} className="p-3 bg-slate-50 dark:bg-slate-800 rounded-xl flex justify-between border dark:border-slate-850 flex-wrap gap-4">
                         <div>
                           <strong>{s.name}</strong>
                           <span className="text-[10px] text-slate-400 block mt-0.5">Title: {s.designation} | Manager: {s.manager}</span>
@@ -329,7 +331,8 @@ export function MasterDataCenter() {
                   <MapPin className="h-4 w-4 text-brand-primary" /> Region, State & City Territory Registry
                 </CardTitle>
                 <div className="overflow-x-auto">
-                  <table className="w-full text-left border-collapse">
+                  <div className="overflow-x-auto w-full -mx-4 sm:mx-0 px-4 sm:px-0 scrollbar-hide">
+<table className="w-full text-left border-collapse">
                     <thead>
                       <tr className="border-b dark:border-slate-800 text-slate-400 font-bold uppercase text-[10px]">
                         <th className="py-2 px-3">Country</th>
@@ -351,6 +354,7 @@ export function MasterDataCenter() {
                       ))}
                     </tbody>
                   </table>
+</div>
                 </div>
               </Card>
 
@@ -488,7 +492,7 @@ export function MasterDataCenter() {
                 </CardTitle>
                 <div className="space-y-3">
                   {dedupLogs.map((log, i) => (
-                    <div key={i} className="p-3.5 bg-rose-50 dark:bg-rose-950/20 text-rose-800 dark:text-rose-200 border border-rose-100 dark:border-rose-900 rounded-xl flex justify-between items-center font-bold leading-relaxed">
+                    <div key={i} className="p-3.5 bg-rose-50 dark:bg-rose-950/20 text-rose-800 dark:text-rose-200 border border-rose-100 dark:border-rose-900 rounded-xl flex justify-between items-center font-bold leading-relaxed flex-wrap gap-4">
                       <span>{log}</span>
                       <button
                         onClick={() => handleMergeCustomers('1', '3')}
@@ -544,7 +548,7 @@ export function MasterDataCenter() {
                       <div className="space-y-2">
                         <span className="font-bold text-slate-400 uppercase text-[9px] block">Customer Registry Results</span>
                         {filteredSearchResults.customers.map(c => (
-                          <div key={c.id} className="p-2.5 bg-slate-50 dark:bg-slate-800 rounded-lg flex justify-between">
+                          <div key={c.id} className="p-2.5 bg-slate-50 dark:bg-slate-800 rounded-lg flex justify-between flex-wrap gap-4">
                             <span>{c.name}</span>
                             <span className="text-slate-400">Limit: ₹{c.creditLimit.toLocaleString()}</span>
                           </div>
@@ -556,7 +560,7 @@ export function MasterDataCenter() {
                       <div className="space-y-2">
                         <span className="font-bold text-slate-400 uppercase text-[9px] block">Products Registry Results</span>
                         {filteredSearchResults.products.map(p => (
-                          <div key={p.sku} className="p-2.5 bg-slate-50 dark:bg-slate-800 rounded-lg flex justify-between">
+                          <div key={p.sku} className="p-2.5 bg-slate-50 dark:bg-slate-800 rounded-lg flex justify-between flex-wrap gap-4">
                             <span>{p.name}</span>
                             <span className="text-slate-400">SKU: {p.sku}</span>
                           </div>
@@ -603,11 +607,11 @@ export function MasterDataCenter() {
                       <ShoppingBag className="h-4 w-4" /> Customer Dashboard Simulator
                     </CardTitle>
                     <div className="p-3 bg-slate-50 dark:bg-slate-800 rounded-xl border dark:border-slate-850 space-y-2">
-                      <div className="flex justify-between">
+                      <div className="flex justify-between flex-wrap gap-4">
                         <span>Dispatch Progress:</span>
                         <strong className="text-emerald-500">✓ Fully Dispatched (2,400 pcs)</strong>
                       </div>
-                      <div className="flex justify-between">
+                      <div className="flex justify-between flex-wrap gap-4">
                         <span>Available Credit Balance:</span>
                         <strong className="text-slate-900 dark:text-white">₹3,75,000 / ₹5,000,00</strong>
                       </div>
@@ -619,11 +623,11 @@ export function MasterDataCenter() {
                       <Activity className="h-4 w-4" /> Broker Commission Ledger
                     </CardTitle>
                     <div className="p-3 bg-slate-50 dark:bg-slate-800 rounded-xl border dark:border-slate-850 space-y-2">
-                      <div className="flex justify-between">
+                      <div className="flex justify-between flex-wrap gap-4">
                         <span>Assigned Customers:</span>
                         <strong className="text-slate-900 dark:text-white">Radha Textiles, Delhi Garments</strong>
                       </div>
-                      <div className="flex justify-between">
+                      <div className="flex justify-between flex-wrap gap-4">
                         <span>Calculated Net Brokerage:</span>
                         <strong className="text-emerald-600">₹32,500 (calculated at 5%)</strong>
                       </div>

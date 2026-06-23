@@ -310,7 +310,8 @@ export function Forecasting() {
               </CardHeader>
               <CardContent>
                 <div className="overflow-x-auto">
-                  <table className="w-full text-sm">
+                  <div className="overflow-x-auto w-full -mx-4 sm:mx-0 px-4 sm:px-0 scrollbar-hide">
+<table className="w-full text-sm">
                     <thead>
                       <tr className="border-b border-slate-100">
                         <th className="text-left py-2 px-3 text-xs font-black text-slate-400 uppercase">Item</th>
@@ -340,6 +341,7 @@ export function Forecasting() {
                       ))}
                     </tbody>
                   </table>
+</div>
                 </div>
               </CardContent>
             </Card>

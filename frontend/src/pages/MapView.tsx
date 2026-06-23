@@ -245,7 +245,7 @@ export function MapView() {
       {/* Top Header */}
       <div className="p-6 bg-white/50 backdrop-blur-md border-b border-slate-200 shadow-sm z-10 shrink-0 sticky top-0">
         <FadeIn>
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between flex-wrap gap-4">
             <div className="flex items-center gap-4">
               <div className="h-12 w-12 bg-indigo-100 text-indigo-600 rounded-2xl flex items-center justify-center shadow-inner cursor-pointer" onClick={handleResetMap}>
                 <Activity className="h-6 w-6" />
@@ -291,15 +291,15 @@ export function MapView() {
                   <h3 className="text-4xl font-black mb-6">₹{(globalMetrics.totalRev / 10000000).toFixed(2)} Cr</h3>
                   
                   <div className="space-y-4">
-                    <div className="flex items-center justify-between border-b border-white/10 pb-2">
+                    <div className="flex items-center justify-between border-b border-white/10 pb-2 flex-wrap gap-4">
                       <span className="text-white/70 flex items-center gap-2 text-sm"><Users className="h-4 w-4"/> Total Sellers</span>
                       <span className="font-bold">{globalMetrics.total}</span>
                     </div>
-                    <div className="flex items-center justify-between border-b border-white/10 pb-2">
+                    <div className="flex items-center justify-between border-b border-white/10 pb-2 flex-wrap gap-4">
                       <span className="text-white/70 flex items-center gap-2 text-sm"><TrendingUp className="h-4 w-4"/> 🔥 Hot Leads</span>
                       <span className="font-bold text-emerald-400">{globalMetrics.hotCount}</span>
                     </div>
-                    <div className="flex items-center justify-between">
+                    <div className="flex items-center justify-between flex-wrap gap-4">
                       <span className="text-white/70 flex items-center gap-2 text-sm"><AlertCircle className="h-4 w-4"/> Est. Outstanding</span>
                       <span className="font-bold text-rose-400">₹{(globalMetrics.totalOutstanding / 100000).toFixed(1)} L</span>
                     </div>
@@ -403,15 +403,15 @@ export function MapView() {
                         <p className="text-xs text-slate-400">Click circle to drill-down into {pointCount} sellers</p>
                       </div>
                       <div className="bg-white p-4 space-y-3">
-                        <div className="flex justify-between items-center border-b border-slate-100 pb-2">
+                        <div className="flex justify-between items-center border-b border-slate-100 pb-2 flex-wrap gap-4">
                           <span className="text-xs font-bold text-slate-500 uppercase">Est. Territory Revenue</span>
                           <span className="text-sm font-black text-emerald-600">₹{(revenue / 10000000).toFixed(2)} Cr</span>
                         </div>
-                        <div className="flex justify-between items-center border-b border-slate-100 pb-2">
+                        <div className="flex justify-between items-center border-b border-slate-100 pb-2 flex-wrap gap-4">
                           <span className="text-xs font-bold text-slate-500 uppercase">Sellers in Region</span>
                           <span className="text-sm font-black text-slate-900">{pointCount}</span>
                         </div>
-                        <div className="flex justify-between items-center pb-1">
+                        <div className="flex justify-between items-center pb-1 flex-wrap gap-4">
                           <span className="text-xs font-bold text-slate-500 uppercase">Follow-up / Outstanding</span>
                           <span className="text-sm font-bold text-rose-500">₹{(outstanding / 100000).toFixed(1)} L</span>
                         </div>
@@ -437,7 +437,7 @@ export function MapView() {
                 >
                   <Popup className="rounded-2xl border-0 shadow-2xl p-0 overflow-hidden min-w-[250px]">
                      <div className="bg-white p-4">
-                        <div className="flex items-start justify-between mb-3">
+                        <div className="flex items-start justify-between mb-3 flex-wrap gap-4">
                           <div>
                             <h4 className="font-bold text-slate-900">{(cluster.properties as any).name}</h4>
                             <p className="text-xs text-slate-500 mt-0.5">{(cluster.properties as any).state}</p>
@@ -447,11 +447,11 @@ export function MapView() {
                           </div>
                         </div>
                         <div className="space-y-2 bg-slate-50 p-3 rounded-lg border border-slate-100">
-                          <div className="flex justify-between text-xs">
+                          <div className="flex justify-between text-xs flex-wrap gap-4">
                             <span className="text-slate-500 font-medium">Revenue</span>
                             <span className="font-bold text-emerald-600">₹{((cluster.properties as any).revenue / 1000).toFixed(1)}k</span>
                           </div>
-                          <div className="flex justify-between text-xs">
+                          <div className="flex justify-between text-xs flex-wrap gap-4">
                             <span className="text-slate-500 font-medium">Phone</span>
                             <span className="font-bold text-slate-700">{(cluster.properties as any).mobile}</span>
                           </div>

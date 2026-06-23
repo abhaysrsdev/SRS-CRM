@@ -76,7 +76,7 @@ export function CatalogSyncCenter() {
         <span className="text-slate-900">Sync Center</span>
       </div>
 
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 flex-wrap gap-4">
         <div>
           <h2 className="text-2xl md:text-3xl font-black text-slate-900 flex items-center gap-2">
             <FolderSync className="h-7 w-7 text-brand-primary" />
@@ -154,7 +154,7 @@ export function CatalogSyncCenter() {
           <CardHeader className="pb-2">
             <CardTitle className="text-xs font-black text-slate-400 uppercase tracking-wider">Sync Status</CardTitle>
           </CardHeader>
-          <CardContent className="flex items-center justify-between">
+          <CardContent className="flex items-center justify-between flex-wrap gap-4">
             <Badge className={`${syncing ? 'bg-blue-100 text-blue-800' : 'bg-emerald-100 text-emerald-800'} font-black text-[10px] px-2 py-0.5 rounded-lg border-none shadow-none`}>
               {syncing ? 'Syncing' : 'Idle / Up to Date'}
             </Badge>

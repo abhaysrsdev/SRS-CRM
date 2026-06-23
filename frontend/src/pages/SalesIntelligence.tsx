@@ -710,12 +710,13 @@ export function SalesIntelligence() {
       {drillDownModal.open && (
         <div className="fixed inset-0 bg-black/40 backdrop-blur-sm z-50 flex items-center justify-center p-4">
           <div className={`w-full max-w-xl rounded-2xl p-6 shadow-2xl border ${darkMode ? 'bg-slate-900 border-slate-800 text-white' : 'bg-white border-slate-200 text-slate-900'}`}>
-            <div className="flex justify-between items-center mb-4">
+            <div className="flex justify-between items-center mb-4 flex-wrap gap-4">
               <h3 className="font-black text-sm uppercase tracking-wider">{drillDownModal.title}</h3>
               <button onClick={() => setDrillDownModal(prev => ({ ...prev, open: false }))} className="text-slate-400 hover:text-slate-600 font-bold text-xs">Close</button>
             </div>
             <div className="overflow-x-auto max-h-96">
-              <table className="w-full text-left border-collapse text-xs font-semibold">
+              <div className="overflow-x-auto w-full -mx-4 sm:mx-0 px-4 sm:px-0 scrollbar-hide">
+<table className="w-full text-left border-collapse text-xs font-semibold">
                 <thead>
                   <tr className={`border-b ${darkMode ? 'border-slate-800' : 'border-slate-100'} text-slate-400 font-bold uppercase`}>
                     {drillDownModal.headers.map((h, idx) => (
@@ -733,6 +734,7 @@ export function SalesIntelligence() {
                   ))}
                 </tbody>
               </table>
+</div>
             </div>
           </div>
         </div>
@@ -753,7 +755,7 @@ export function SalesIntelligence() {
                 darkMode ? 'bg-slate-900 border-slate-800 text-white' : 'bg-white/95 backdrop-blur-xl border-slate-200'
               }`}
             >
-              <div className="flex justify-between items-center mb-6">
+              <div className="flex justify-between items-center mb-6 flex-wrap gap-4">
                 <h3 className="font-black text-sm flex items-center gap-2">
                   <Bell className="h-5 w-5 text-rose-500" /> Real-time Alert Hub
                 </h3>
@@ -776,7 +778,7 @@ export function SalesIntelligence() {
 
       {/* Global Filter Bar (Module 13 & 21 Theme Toggle) */}
       <div className={`border-b px-8 py-4 sticky top-0 z-40 shadow-sm ${darkMode ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200'}`}>
-        <div className="max-w-[1700px] mx-auto flex flex-wrap gap-4 items-center justify-between">
+        <div className="max-w-[1700px] mx-auto flex flex-wrap gap-4 items-center justify-between flex-wrap gap-4">
           <div className="flex items-center gap-4">
             <Filter className="h-4 w-4 text-brand-primary" />
             <span className="text-xs font-black uppercase tracking-wider">Enterprise Global Filters</span>
@@ -828,7 +830,7 @@ export function SalesIntelligence() {
 
       {/* Main Subnavigation Header */}
       <div className={`px-8 py-5 border-b shadow-inner ${darkMode ? 'bg-slate-900/60 border-slate-800' : 'bg-slate-50 border-slate-200'}`}>
-        <div className="max-w-[1700px] mx-auto flex flex-wrap items-center justify-between gap-6">
+        <div className="max-w-[1700px] mx-auto flex flex-wrap items-center justify-between gap-6 flex-wrap gap-4">
           <div className="flex items-center gap-3">
             <div className="h-10 w-10 bg-gradient-to-tr from-brand-primary to-indigo-600 rounded-xl flex items-center justify-center text-white shadow-md">
               <Brain className="h-5 w-5" />
@@ -983,7 +985,8 @@ export function SalesIntelligence() {
                     <p className="font-semibold">{chat.text}</p>
                     {chat.data && (
                       <div className="mt-3 overflow-x-auto border-t pt-2 dark:border-slate-700">
-                        <table className="w-full text-left border-collapse text-[10px]">
+                        <div className="overflow-x-auto w-full -mx-4 sm:mx-0 px-4 sm:px-0 scrollbar-hide">
+<table className="w-full text-left border-collapse text-[10px]">
                           <thead>
                             <tr className="border-b dark:border-slate-700 text-slate-500 font-bold">
                               {Object.keys(chat.data[0]).map((h, i) => <th key={i} className="py-1 px-2">{h}</th>)}
@@ -997,6 +1000,7 @@ export function SalesIntelligence() {
                             ))}
                           </tbody>
                         </table>
+</div>
                       </div>
                     )}
                   </div>
@@ -1106,7 +1110,7 @@ export function SalesIntelligence() {
                       {currentTimelineWithNotes.map((t, idx) => (
                         <div key={idx} className="relative">
                           <span className="absolute -left-6 top-1 h-3.5 w-3.5 rounded-full border-2 border-white bg-brand-primary shadow-sm" />
-                          <div className="flex justify-between font-bold text-slate-800 dark:text-slate-200">
+                          <div className="flex justify-between font-bold text-slate-800 dark:text-slate-200 flex-wrap gap-4">
                             <span>{t.type}</span>
                             <span className="text-slate-400 text-[10px]">{new Date(t.date).toLocaleDateString()}</span>
                           </div>
@@ -1135,7 +1139,7 @@ export function SalesIntelligence() {
               {/* Task list */}
               <div className="space-y-2.5 max-h-60 overflow-y-auto pr-1 scrollbar-hide">
                 {tasks.map((t, idx) => (
-                  <div key={idx} className="p-3 bg-slate-50 dark:bg-slate-800 rounded-xl flex justify-between items-center border border-slate-100 dark:border-slate-800">
+                  <div key={idx} className="p-3 bg-slate-50 dark:bg-slate-800 rounded-xl flex justify-between items-center border border-slate-100 dark:border-slate-800 flex-wrap gap-4">
                     <div>
                       <span className="font-bold text-slate-800 dark:text-white block">{t.title}</span>
                       <p className="text-[10px] text-slate-400 mt-1">Assignee: {t.assignee} ({t.role}) | Customer: {t.customer} | Due: {t.dueDate}</p>
@@ -1177,7 +1181,7 @@ export function SalesIntelligence() {
               <div className="space-y-3">
                 {approvals.map((a, idx) => (
                   <div key={idx} className="p-3 bg-slate-50 dark:bg-slate-800 rounded-xl border border-slate-100 dark:border-slate-800 space-y-2.5">
-                    <div className="flex justify-between font-bold text-slate-800 dark:text-white">
+                    <div className="flex justify-between font-bold text-slate-800 dark:text-white flex-wrap gap-4">
                       <span>{a.type}</span>
                       <span className={`px-2 py-0.5 rounded text-[9px] ${
                         a.status === 'Approved' ? 'bg-emerald-100 text-emerald-800' : a.status === 'Denied' ? 'bg-rose-100 text-rose-800' : 'bg-amber-100 text-amber-800'
@@ -1206,7 +1210,8 @@ export function SalesIntelligence() {
                 <CardTitle className="text-sm font-black">Customer Credit Limits & Utilization</CardTitle>
               </CardHeader>
               <div className="overflow-y-auto flex-1">
-                <table className="w-full text-left text-xs border-collapse font-semibold">
+                <div className="overflow-x-auto w-full -mx-4 sm:mx-0 px-4 sm:px-0 scrollbar-hide">
+<table className="w-full text-left text-xs border-collapse font-semibold">
                   <thead>
                     <tr className="bg-slate-50 dark:bg-slate-800 border-b border-slate-100 dark:border-slate-800 text-slate-400 font-bold uppercase">
                       <th className="px-5 py-3">Customer Name</th>
@@ -1234,6 +1239,7 @@ export function SalesIntelligence() {
                     })}
                   </tbody>
                 </table>
+</div>
               </div>
             </Card>
 
@@ -1270,7 +1276,7 @@ export function SalesIntelligence() {
                   const achPct = Math.round((t.achieved / t.target) * 100);
                   return (
                     <div key={idx} className="space-y-1 font-bold text-slate-700 dark:text-slate-300">
-                      <div className="flex justify-between text-[11px]">
+                      <div className="flex justify-between text-[11px] flex-wrap gap-4">
                         <span>{t.category}</span>
                         <span>{achPct}% Achieved</span>
                       </div>
@@ -1289,7 +1295,8 @@ export function SalesIntelligence() {
                 <CardTitle className="text-sm font-black">Sales Representative Scorecards</CardTitle>
               </CardHeader>
               <div className="overflow-y-auto flex-1">
-                <table className="w-full text-left text-xs border-collapse font-semibold">
+                <div className="overflow-x-auto w-full -mx-4 sm:mx-0 px-4 sm:px-0 scrollbar-hide">
+<table className="w-full text-left text-xs border-collapse font-semibold">
                   <thead>
                     <tr className="bg-slate-50 dark:bg-slate-800 border-b border-slate-100 dark:border-slate-800 text-slate-400 font-bold uppercase">
                       <th className="px-5 py-3">Representative</th>
@@ -1309,6 +1316,7 @@ export function SalesIntelligence() {
                     ))}
                   </tbody>
                 </table>
+</div>
               </div>
             </Card>
           </div>
@@ -1324,7 +1332,7 @@ export function SalesIntelligence() {
               </CardTitle>
               <div className="flex-1 overflow-y-auto space-y-3">
                 {documents.map((doc, idx) => (
-                  <div key={idx} className="p-3 bg-slate-50 dark:bg-slate-800 rounded-xl flex items-center justify-between border border-slate-100 dark:border-slate-800">
+                  <div key={idx} className="p-3 bg-slate-50 dark:bg-slate-800 rounded-xl flex items-center justify-between border border-slate-100 dark:border-slate-800 flex-wrap gap-4">
                     <div className="flex items-center gap-2.5">
                       <File className="h-5 w-5 text-slate-400" />
                       <div>
@@ -1348,7 +1356,7 @@ export function SalesIntelligence() {
                 <span className="font-bold text-slate-400">Quick dispatch Comms templates:</span>
                 <div className="grid grid-cols-2 gap-4">
                   {metrics.customerRiskList.slice(0, 4).map((c, idx) => (
-                    <div key={idx} className="bg-slate-50 dark:bg-slate-800 p-3.5 rounded-xl border border-slate-100 dark:border-slate-800 flex justify-between items-center">
+                    <div key={idx} className="bg-slate-50 dark:bg-slate-800 p-3.5 rounded-xl border border-slate-100 dark:border-slate-800 flex justify-between items-center flex-wrap gap-4">
                       <div>
                         <span className="font-bold text-slate-800 dark:text-white">{c.name}</span>
                         <p className="text-[10px] text-slate-400 mt-1">Outstanding: ₹{c.pendingAmt.toLocaleString()}</p>
@@ -1365,7 +1373,7 @@ export function SalesIntelligence() {
                   <span className="font-bold text-slate-400 block mb-3">Communication Logs</span>
                   <div className="space-y-2.5 max-h-40 overflow-y-auto pr-1 scrollbar-hide">
                     {commsLog.map((log, idx) => (
-                      <div key={idx} className="p-2.5 bg-slate-50 dark:bg-slate-800 rounded-lg flex justify-between items-center">
+                      <div key={idx} className="p-2.5 bg-slate-50 dark:bg-slate-800 rounded-lg flex justify-between items-center flex-wrap gap-4">
                         <div>
                           <strong className="text-slate-800 dark:text-white uppercase text-[10px]">{log.type} sent to {log.customer}</strong>
                           <p className="text-[10px] text-slate-400 mt-0.5">{log.message}</p>
@@ -1425,7 +1433,8 @@ export function SalesIntelligence() {
                   <CardTitle className="text-sm font-black">Security Audit Logs</CardTitle>
                 </CardHeader>
                 <div className="overflow-y-auto flex-1">
-                  <table className="w-full text-left text-xs border-collapse font-semibold">
+                  <div className="overflow-x-auto w-full -mx-4 sm:mx-0 px-4 sm:px-0 scrollbar-hide">
+<table className="w-full text-left text-xs border-collapse font-semibold">
                     <thead>
                       <tr className="bg-slate-50 dark:bg-slate-800 border-b border-slate-100 dark:border-slate-800 text-slate-400 font-bold uppercase">
                         <th className="px-5 py-3">Timestamp</th>
@@ -1445,6 +1454,7 @@ export function SalesIntelligence() {
                       ))}
                     </tbody>
                   </table>
+</div>
                 </div>
               </Card>
 
@@ -1454,15 +1464,15 @@ export function SalesIntelligence() {
                   <Brain className="h-4 w-4 text-emerald-500" /> Logistical System Status
                 </CardTitle>
                 <div className="space-y-3">
-                  <div className="flex justify-between font-bold text-slate-700 dark:text-slate-300">
+                  <div className="flex justify-between font-bold text-slate-700 dark:text-slate-300 flex-wrap gap-4">
                     <span>Database Engine Status</span>
                     <span className="text-emerald-500">✓ SQLite Connected</span>
                   </div>
-                  <div className="flex justify-between font-bold text-slate-700 dark:text-slate-300">
+                  <div className="flex justify-between font-bold text-slate-700 dark:text-slate-300 flex-wrap gap-4">
                     <span>IndexedDB Sync State</span>
                     <span className="text-emerald-500">✓ Active</span>
                   </div>
-                  <div className="flex justify-between font-bold text-slate-700 dark:text-slate-300">
+                  <div className="flex justify-between font-bold text-slate-700 dark:text-slate-300 flex-wrap gap-4">
                     <span>Outstanding Job Backlog</span>
                     <span>0 Pending jobs</span>
                   </div>
