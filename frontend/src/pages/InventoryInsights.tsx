@@ -192,7 +192,7 @@ export function InventoryInsights() {
     <div className="min-h-screen bg-brand-bg overflow-y-auto">
       {/* ── Header ───────────────────────────────────────────────────────────── */}
       <div className="sticky top-0 z-20 bg-white/80 backdrop-blur-xl border-b border-slate-200 shadow-sm">
-        <div className="max-w-[1700px] mx-auto px-8 py-5 flex items-center justify-between gap-6 flex-wrap flex-wrap gap-4">
+        <div className="max-w-[1700px] mx-auto px-4 sm:px-8 py-5 flex items-center justify-between gap-6 flex-wrap">
           <FadeIn>
             <div className="flex items-center gap-4">
               <div className="h-12 w-12 bg-amber-100 text-amber-600 rounded-2xl flex items-center justify-center shadow-inner">
@@ -242,7 +242,7 @@ export function InventoryInsights() {
                   <h3 className="text-lg font-black text-slate-900">Product Purchase History Tags</h3>
                   <span className="text-xs bg-amber-100 text-amber-700 border border-amber-200 px-2 py-1 rounded-full font-bold">Reviewed and Updated</span>
                 </div>
-                <div className="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-5 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
                   {[
                     { cat: 'Bestsellers',      emoji: '⭐', label: 'Bestsellers', sub: 'Top 30 (duration - last)', color: '#10b981', bg: 'from-emerald-500 to-emerald-700', pcs: '5 pcs' },
                     { cat: 'Running Products', emoji: '🔵', label: 'Running Products', sub: '(20-100)',              color: '#3b82f6', bg: 'from-blue-500 to-blue-700',    pcs: '6 pcs' },
@@ -541,9 +541,9 @@ export function InventoryInsights() {
             </motion.div>
           )}
 
-          {/* Catalog tab removed */
-          false && (
-            <motion.div key="catalog" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="space-y-6">
+          {/* ════════════════════ TAB: RULES ════════════════════════════════ */}
+          {activeTab === 'rules' && (
+            <motion.div key="rules" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="space-y-6">
               
               {/* Filters Row */}
               <div className="bg-white rounded-2xl border border-slate-100 shadow-soft p-5">
@@ -871,7 +871,7 @@ export function InventoryInsights() {
                 {/* Aging Breakdown */}
                 <div>
                   <h3 className="font-black text-slate-900 text-lg mb-4">📦 Inventory Aging Breakdown</h3>
-                  <div className="grid grid-cols-2 xl:grid-cols-4 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
                     {agingBuckets.map((bucket) => (
                       <div key={bucket.days} className={`bg-white rounded-2xl border shadow-soft p-5 ${
                         bucket.risk === 'critical' ? 'border-rose-200' :
