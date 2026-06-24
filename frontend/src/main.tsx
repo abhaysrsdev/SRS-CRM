@@ -7,6 +7,13 @@ import App from './App.tsx'
 
 const queryClient = new QueryClient();
 
+// Suppress Recharts ResizeObserver errors in React 19/Vite
+window.addEventListener('error', e => {
+  if (e.message.includes('ResizeObserver loop limit exceeded') || e.message.includes('ResizeObserver loop completed')) {
+    e.stopImmediatePropagation();
+  }
+});
+
 class ErrorBoundary extends React.Component<any, any> {
   constructor(props: any) {
     super(props);
