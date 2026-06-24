@@ -486,7 +486,7 @@ export function CustomerLists() {
       <div className={`flex-1 bg-brand-bg overflow-y-auto scrollbar-hide relative ${
         mobileView === 'detail' ? 'block' : 'hidden md:block'
       }`}>
-        <AnimatePresence mode="wait">
+        <AnimatePresence>
           {selectedCustomer ? (
             <SlideInRight key={selectedCustomer.id} className="min-h-full p-4 md:p-8 max-w-6xl mx-auto space-y-8">
               <button

@@ -225,7 +225,7 @@ export function ControlCenter() {
 
       <div className="max-w-[1700px] mx-auto px-8 py-8 space-y-8">
         
-        <AnimatePresence mode="wait">
+        <AnimatePresence>
           
           {/* TAB 1: USERS & PERMISSIONS */}
           {activeTab === 'users' && (

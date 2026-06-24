@@ -456,7 +456,7 @@ export function DataHub() {
         </div>
       </div>
 
-      <AnimatePresence mode="wait">
+      <AnimatePresence>
         {/* ── TAB: OVERVIEW (existing content preserved) ─────────────────────── */}
         {activeTab === 'overview' && (
           <motion.div

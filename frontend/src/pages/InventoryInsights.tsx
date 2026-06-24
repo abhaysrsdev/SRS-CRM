@@ -537,13 +537,12 @@ export function InventoryInsights() {
                   </CardContent>
                 </Card>
               </FadeIn>
-
             </motion.div>
           )}
 
-          {/* ════════════════════ TAB: RULES ════════════════════════════════ */}
-          {activeTab === 'rules' && (
-            <motion.div key="rules" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="space-y-6">
+          {/* ════════════════════ TAB: LIST VIEW (merged into overview) ════════════════════════════════ */}
+          {activeTab === 'overview' && (
+            <motion.div key="overview_list" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="space-y-6">
               
               {/* Filters Row */}
               <div className="bg-white rounded-2xl border border-slate-100 shadow-soft p-5">
