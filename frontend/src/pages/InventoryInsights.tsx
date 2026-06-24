@@ -71,15 +71,15 @@ function KPICard({ label, value, sub, icon: Icon, color }: any) {
   return (
     <motion.div 
       whileHover={{ y: -2, boxShadow: '0 10px 30px rgba(0,0,0,0.08)' }}
-      className="bg-white rounded-2xl p-5 border border-slate-100 shadow-soft flex items-start gap-4"
+      className="bg-white rounded-xl sm:rounded-2xl p-3 sm:p-5 border border-slate-100 shadow-soft flex flex-col sm:flex-row items-center sm:items-start gap-2 sm:gap-4 text-center sm:text-left"
     >
-      <div className={`h-12 w-12 rounded-xl flex items-center justify-center shrink-0`} style={{ background: color + '18' }}>
-        <Icon className="h-6 w-6" style={{ color }} />
+      <div className={`h-10 w-10 sm:h-12 sm:w-12 rounded-xl flex items-center justify-center shrink-0`} style={{ background: color + '18' }}>
+        <Icon className="h-5 w-5 sm:h-6 sm:w-6" style={{ color }} />
       </div>
-      <div className="min-w-0">
-        <p className="text-xs font-bold text-slate-400 uppercase tracking-wider">{label}</p>
-        <h3 className="text-xl sm:text-2xl font-black text-slate-900 mt-0.5 break-words">{value}</h3>
-        {sub && <p className="text-[10px] sm:text-xs text-slate-500 mt-0.5">{sub}</p>}
+      <div className="min-w-0 w-full">
+        <p className="text-[10px] sm:text-xs font-bold text-slate-400 uppercase tracking-wider truncate">{label}</p>
+        <h3 className="text-lg sm:text-xl md:text-2xl font-black text-slate-900 mt-0.5 truncate">{value}</h3>
+        {sub && <p className="text-[9px] sm:text-[10px] text-slate-500 mt-0.5 leading-tight">{sub}</p>}
       </div>
     </motion.div>
   );
@@ -221,10 +221,10 @@ export function InventoryInsights() {
       </div>
 
       <div className="max-w-[1700px] mx-auto px-4 sm:px-8 py-8 space-y-8">
-        <AnimatePresence mode="wait">
+        
           {/* ════════════════════ TAB: OVERVIEW ════════════════════════════════ */}
           {activeTab === 'overview' && (
-            <motion.div key="overview" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="space-y-8">
+            <motion.div key="overview" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="space-y-8">
 
               {/* ── KPI Strip ─────────────────────────────────────────────────────── */}
               <StaggerContainer className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-4">
@@ -543,7 +543,7 @@ export function InventoryInsights() {
 
           {/* ════════════════════ TAB: RULES ════════════════════════════════ */}
           {activeTab === 'rules' && (
-            <motion.div key="rules" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="space-y-6">
+            <motion.div key="rules" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="space-y-6">
               
               {/* Filters Row */}
               <div className="bg-white rounded-2xl border border-slate-100 shadow-soft p-5">
@@ -821,7 +821,7 @@ export function InventoryInsights() {
             const stuckItems = getStuckStockItems(engineItems);
 
             return (
-              <motion.div key="aging" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="space-y-8">
+              <motion.div key="aging" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="space-y-8">
 
                 {/* Health Score Gauge */}
                 <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
@@ -1028,10 +1028,8 @@ export function InventoryInsights() {
                 </div>
               </motion.div>
             );
-          })()}
-        </AnimatePresence>
+          })}
       </div>
     </div>
   );
 }
-
