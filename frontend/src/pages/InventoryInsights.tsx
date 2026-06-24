@@ -1028,7 +1028,7 @@ export function InventoryInsights() {
                 </div>
               </motion.div>
             );
-          })}
+          })()}
       </div>
     </div>
   );
