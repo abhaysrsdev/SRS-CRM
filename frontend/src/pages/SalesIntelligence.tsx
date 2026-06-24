@@ -1,5 +1,5 @@
 /* eslint-disable */
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { useCustomers, useSalesOrders, useProducts } from '../hooks/useQueries';
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
 import { Skeleton } from '../components/ui/skeleton';
@@ -27,15 +27,17 @@ const retentionScoreProxy = (list: any[]) => {
 };
 
 export function SalesIntelligence() {
-  const { data: customers, isLoading: isCustomersLoading } = useCustomers();
-  const { data: salesOrders, isLoading: isOrdersLoading } = useSalesOrders();
-  const { data: products, isLoading: isProductsLoading } = useProducts();
-
   // Navigation tabs (Phase 4 Tabs)
   const [activeTab, setActiveTab] = useState<'boardroom' | 'copilot' | 'timeline360' | 'operations' | 'credit' | 'performance' | 'docs' | 'diagnostics'>('boardroom');
   
   // Theme state
   const [darkMode, setDarkMode] = useState(() => localStorage.getItem('crm-dark-mode') === 'true');
+
+  const { data: customers, isLoading: isCustomersLoading } = useCustomers();
+  const { data: salesOrders, isLoading: isOrdersLoading } = useSalesOrders();
+  const { data: products, isLoading: isProductsLoading } = useProducts();
+
+
   const toggleDarkMode = () => {
     const nextMode = !darkMode;
     setDarkMode(nextMode);

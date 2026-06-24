@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { useCustomers, useProducts } from '../hooks/useQueries';
 import { Skeleton } from '../components/ui/skeleton';
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
@@ -14,6 +14,7 @@ import { batchComputeScores } from '../lib/customerEngine';
 export function Forecasting() {
   const { data: customers, isLoading: cl } = useCustomers();
   const { data: products, isLoading: pl } = useProducts();
+
   const [forecastMonths, setForecastMonths] = useState(6);
 
   const partyScores = useMemo(() => {

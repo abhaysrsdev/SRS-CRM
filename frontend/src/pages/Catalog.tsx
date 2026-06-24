@@ -119,13 +119,18 @@ const _parseLogic = (images: CatalogImage[]): ParsedImages => {
 const parseImages = _parseLogic;
 const parseImagesStatic = _parseLogic;
 
+var globalCachedFolders: CatalogFolder[] | null = null;
+var globalCachedSyncStatus: any = null;
+var globalHasMore: boolean = true;
+var globalPage: number = 1;
+
 export function Catalog() {
-  const [folders, setFolders] = useState<CatalogFolder[]>([]);
+  const [folders, setFolders] = useState<CatalogFolder[]>(globalCachedFolders || []);
   const [searchTerm, setSearchTerm] = useState('');
-  const [loading, setLoading] = useState(true);
-  const [page, setPage] = useState(1);
-  const [hasMore, setHasMore] = useState(true);
-  const [syncStatus, setSyncStatus] = useState<any>(null);
+  const [loading, setLoading] = useState(!globalCachedFolders);
+  const [page, setPage] = useState(globalPage);
+  const [hasMore, setHasMore] = useState(globalHasMore);
+  const [syncStatus, setSyncStatus] = useState<any>(globalCachedSyncStatus);
 
   // Modal & Gallery state
   const [selectedFolder, setSelectedFolder] = useState<CatalogFolder | null>(null);
@@ -140,6 +145,86 @@ export function Catalog() {
 
   const suggestionTags = ['trending', 'new arrival', 'clearance', 'premium', 'vip only'];
   const loaderRef = useRef<HTMLDivElement>(null);
+
+  // ── fetchSyncStatus defined before useEffect ──
+  const fetchSyncStatus = useCallback(async () => {
+    if (globalCachedSyncStatus) {
+      setSyncStatus(globalCachedSyncStatus);
+      return;
+    }
+    try {
+      const res = await fetch(`${API_BASE_URL}/catalog/sync/status`);
+      const data = await res.json();
+      globalCachedSyncStatus = data;
+      setSyncStatus(data);
+    } catch (e) {}
+  }, []);
+
+  // ── fetchFolders defined before useEffect ──
+  const fetchFolders = useCallback(async (reset = false) => {
+    if (reset && !searchTerm && globalCachedFolders && globalCachedFolders.length > 0) {
+      setFolders(globalCachedFolders);
+      setPage(globalPage);
+      setHasMore(globalHasMore);
+      setLoading(false);
+      // Silent background refresh
+      setTimeout(async () => {
+        try {
+          const url = `${API_BASE_URL}/catalog/folders/?skip=0&limit=20&sort_by=alphabetical`;
+          const response = await fetch(url);
+          const data = await response.json();
+          globalCachedFolders = data;
+          setFolders(data);
+        } catch(e) {}
+      }, 500);
+      return;
+    }
+    setLoading(true);
+    const currentPage = reset ? 1 : page;
+    if (reset) { setPage(1); setFolders([]); }
+    try {
+      const skip = (currentPage - 1) * 20;
+      let url = `${API_BASE_URL}/catalog/folders/?skip=${skip}&limit=20&sort_by=alphabetical`;
+      if (searchTerm) url += `&search=${encodeURIComponent(searchTerm)}`;
+      const response = await fetch(url);
+      const data = await response.json();
+      if (data.length < 20) setHasMore(false);
+      else setHasMore(true);
+      setFolders(prev => {
+        const next = reset ? data : [...prev, ...data];
+        if (!searchTerm) {
+          globalCachedFolders = next;
+          globalPage = currentPage;
+          globalHasMore = data.length >= 20;
+        }
+        return next;
+      });
+    } catch (e) {
+      console.error(e);
+    } finally {
+      setLoading(false);
+    }
+  }, [searchTerm, page]);
+
+  // ── Prefetch on hover ──
+  const handleCardHover = useCallback((folder: CatalogFolder) => {
+    prefetchFolderImages(folder.id);
+  }, []);
+
+  // ── Derived state from images (useMemo MUST be before any conditional return) ──
+  const parsedImages = useMemo(() => parseImages(images), [images]);
+  const { aiPreviews, colorViews, lookbook } = parsedImages;
+
+  const activeColorLower = activeColorKey.toLowerCase();
+  const matchedColorViewKey = Object.keys(colorViews).find(k => k.toLowerCase() === activeColorLower) || Object.keys(colorViews)[0];
+  const viewsForActiveColor = matchedColorViewKey ? colorViews[matchedColorViewKey] : [];
+  const aiPreviewForColor = aiPreviews.find(p => p.colorName.toLowerCase() === activeColorLower);
+  let currentProductImage: CatalogImage | undefined;
+  if (viewsForActiveColor.length > 0) {
+    currentProductImage = viewsForActiveColor[Math.min(activeViewIdx, viewsForActiveColor.length - 1)]?.image;
+  } else if (aiPreviewForColor) {
+    currentProductImage = aiPreviewForColor.image;
+  }
 
   useEffect(() => {
     fetchFolders(true);
@@ -160,33 +245,6 @@ export function Catalog() {
     if (page > 1) fetchFolders(false);
   }, [page]);
 
-  const fetchFolders = async (reset = false) => {
-    setLoading(true);
-    const currentPage = reset ? 1 : page;
-    if (reset) { setPage(1); setFolders([]); }
-    try {
-      const skip = (currentPage - 1) * 20;
-      let url = `${API_BASE_URL}/catalog/folders/?skip=${skip}&limit=20&sort_by=alphabetical`;
-      if (searchTerm) url += `&search=${encodeURIComponent(searchTerm)}`;
-      const response = await fetch(url);
-      const data = await response.json();
-      if (data.length < 20) setHasMore(false);
-      else setHasMore(true);
-      setFolders(prev => reset ? data : [...prev, ...data]);
-    } catch (e) {
-      console.error(e);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const fetchSyncStatus = async () => {
-    try {
-      const res = await fetch(`${API_BASE_URL}/catalog/sync/status`);
-      const data = await res.json();
-      setSyncStatus(data);
-    } catch (e) {}
-  };
 
   const handleOpenFolder = async (folder: CatalogFolder) => {
     setSelectedFolder(folder);
@@ -223,11 +281,6 @@ export function Catalog() {
     }
   };
 
-  // Prefetch on hover
-  const handleCardHover = useCallback((folder: CatalogFolder) => {
-    prefetchFolderImages(folder.id);
-  }, []);
-
   const getImageUrl = (url: string, width: number = 800) => {
     if (!url) return '';
     const id = extractDriveId(url);
@@ -251,26 +304,6 @@ export function Catalog() {
     if (customTagInput.trim()) { handleAddTag(customTagInput.trim()); setCustomTagInput(''); }
   };
 
-  const parsedImages = React.useMemo(() => parseImages(images), [images]);
-  const { aiPreviews, colorViews, lookbook } = parsedImages;
-
-  // Resolve currently displayed image
-  const activeColorLower = activeColorKey.toLowerCase();
-  // Find the color view key that matches the active color (case-insensitive)
-  const matchedColorViewKey = Object.keys(colorViews).find(k => k.toLowerCase() === activeColorLower) || Object.keys(colorViews)[0];
-  const viewsForActiveColor = matchedColorViewKey ? colorViews[matchedColorViewKey] : [];
-  
-  // Find AI preview image for active color
-  const aiPreviewForColor = aiPreviews.find(p => p.colorName.toLowerCase() === activeColorLower);
-  
-  // Current displayed image in product tab
-  let currentProductImage: CatalogImage | undefined;
-  if (viewsForActiveColor.length > 0) {
-    currentProductImage = viewsForActiveColor[Math.min(activeViewIdx, viewsForActiveColor.length - 1)]?.image;
-  } else if (aiPreviewForColor) {
-    currentProductImage = aiPreviewForColor.image;
-  }
-
   const handleColorSelect = (colorName: string) => {
     setActiveColorKey(colorName);
     setActiveViewIdx(0);
@@ -285,12 +318,6 @@ export function Catalog() {
     if (viewsForActiveColor.length > 0) {
       setActiveViewIdx(i => (i + 1) % viewsForActiveColor.length);
     }
-  };
-
-  // For the grid card color dots — use AI previews or color view keys
-  const getCardColors = (folder: CatalogFolder) => {
-    // Use the already-parsed data if this folder is selected; otherwise return empty (dots shown from image_count)
-    return [];
   };
 
   return (

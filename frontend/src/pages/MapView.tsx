@@ -11,42 +11,48 @@ import { MapContainer, TileLayer, CircleMarker, Tooltip, Popup, useMap, Polyline
 import L from 'leaflet';
 import useSupercluster from 'use-supercluster';
 
-// MapState Component — uses refs to avoid infinite update loops
+// MapState Component — Debounced and guarded to prevent unmount React loop crashes
 function MapStateUpdater({ setBounds, setZoom }: { setBounds: (b: any) => void, setZoom: (z: number) => void }) {
   const map = useMap();
-  const setBoundsRef = useRef(setBounds);
-  const setZoomRef = useRef(setZoom);
   
   useEffect(() => {
-    setBoundsRef.current = setBounds;
-    setZoomRef.current = setZoom;
-  }, [setBounds, setZoom]);
+    let isMounted = true;
+    let timeoutId: any = null;
 
-  useEffect(() => {
     const update = () => {
-      try {
-        if (!map || !map.getContainer()) return;
-        const b = map.getBounds();
-        if (!b) return;
-        setBoundsRef.current([
-          b.getSouthWest().lng, b.getSouthWest().lat,
-          b.getNorthEast().lng, b.getNorthEast().lat
-        ]);
-        setZoomRef.current(map.getZoom());
-      } catch (err) {
-        // Ignore unmount errors
-      }
+      if (!isMounted) return;
+      if (timeoutId) clearTimeout(timeoutId);
+      
+      // Debounce the state update to avoid React Router concurrent unmount clashes
+      timeoutId = setTimeout(() => {
+        if (!isMounted || !map || !map.getContainer()) return;
+        try {
+          const b = map.getBounds();
+          if (!b) return;
+          setBounds([
+            b.getSouthWest().lng, b.getSouthWest().lat,
+            b.getNorthEast().lng, b.getNorthEast().lat
+          ]);
+          setZoom(map.getZoom());
+        } catch (err) { }
+      }, 150);
     };
-    update();
+
     map.on('moveend', update);
     map.on('zoomend', update);
+    
+    // Initial update
+    update();
+
     return () => {
+      isMounted = false;
+      if (timeoutId) clearTimeout(timeoutId);
       try {
         map.off('moveend', update);
         map.off('zoomend', update);
       } catch (err) {}
     };
-  }, [map]); // stable: map instance never changes after mount
+  }, [map, setBounds, setZoom]);
 
   return null;
 }
@@ -202,17 +208,7 @@ export function MapView() {
     zoom,
     options: {
       radius: 80, // Pixels before clustering
-      maxZoom: 12, // Stop clustering at zoom level 12 (drill down to individual)
-      map: (props) => ({
-        revenue: props.revenue,
-        outstanding: props.outstanding,
-        count: 1
-      }),
-      reduce: (acc, props) => {
-        acc.revenue += props.revenue;
-        acc.outstanding += props.outstanding;
-        acc.count += props.count;
-      }
+      maxZoom: 14 // Max zoom level to cluster
     }
   });
 
